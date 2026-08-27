@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quimera &bull; Ecosistema Científico, Académico y Profesional</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --primary: #0f766e;
+            --primary-hover: #115e59;
+            --accent: #d97706;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* -------------------------------------------------- */
+        /* NAVEGACIÓN SUPERIOR                                */
+        /* -------------------------------------------------- */
+        .top-bar {
+            background-color: #0b1329;
+            padding: 0.85rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-bar-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            color: #ffffff;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            transition: color 0.2s ease;
+        }
+
+        .brand-logo:hover {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        /* -------------------------------------------------- */
+        /* ENCABEZADO CON IMAGEN Y SOMBRA BALANCEADA          */
+        /* -------------------------------------------------- */
+        header {
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.10)), url('banner.jpeg');
+            background-size: cover;
+            background-position: center center;
+            color: #ffffff;
+            min-height: 280px;
+            padding: 4rem 2rem 3rem 2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .vol-badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #ffffff;
+            font-weight: 500;
+            max-width: 850px;
+            margin: 0 auto;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* -------------------------------------------------- */
+        /* CONTENIDO                                          */
+        /* -------------------------------------------------- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .info-panel {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .info-panel h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-panel h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .info-panel p {
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .info-panel ul, .info-panel ol {
+            padding-left: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+        }
+
+        .info-panel li {
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .process-flow {
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text-main);
+            letter-spacing: 0.02em;
+        }
+
+        /* -------------------------------------------------- */
+        /* PIE DE PÁGINA                                      */
+        /* -------------------------------------------------- */
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background-color: #0f172a;
+            color: #ffffff;
+            font-size: 0.875rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barrita de navegación estandarizada -->
+    <nav class="top-bar">
+        <div class="top-bar-container">
+            <a href="https://quimerac3.github.io/" class="brand-logo">QUIMERA - Inicio General</a>
+            <ul class="nav-links">
+                <li><a href="https://quimerac3.github.io/QuimeraC3-IM-S/">Catálogo de Series Pedagógicas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Encabezado Principal -->
+    <header>
+        <span class="vol-badge">&bull; Ecosistema Quimera &bull;</span>
+        <h1>¿QUÉ ES QUIMERA?</h1>
+        <p>Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.</p>
+    </header>
+
+    <main class="container">
+
+        <article class="info-panel">
+            <h2>Fundamentos del Ecosistema</h2>
+            <p>
+                Quimera es un ecosistema científico, académico y profesional dedicado a generar, integrar, desarrollar y transferir conocimiento.
+            </p>
+            <p>
+                Su propósito nace de una premisa sencilla: <strong>Los problemas complejos requieren algo más que conocimiento especializado: requieren la capacidad de conectar conocimientos.</strong>
+            </p>
+            <p>
+                Por ello, Quimera reúne diferentes disciplinas, metodologías y campos profesionales relacionados con la ciencia, la salud, la medicina, la comunicación, el lenguaje, la educación y la tecnología, creando un espacio en el que el conocimiento puede ser estudiado, cuestionado, organizado, enseñado y aplicado.
+            </p>
+
+            <h2>Más que información: conocimiento con propósito</h2>
+            <p>
+                Quimera no busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable.
+            </p>
+            <p>
+                Para ello, cada proyecto puede recorrer un proceso continuo:
+            </p>
+            <div class="process-flow">
+                PREGUNTA &rarr; INVESTIGACIÓN &rarr; ANÁLISIS &rarr; CONOCIMIENTO &rarr; DESARROLLO &rarr; FORMACIÓN &rarr; APLICACIÓN &rarr; EVALUACIÓN
+            </div>
+            <p>
+                De esta manera, la investigación puede convertirse en formación; la formación, en práctica; y la práctica, nuevamente, en nuevas preguntas que impulsen el conocimiento.
+            </p>
+
+            <h2>Un espacio interdisciplinario</h2>
+            <p>
+                Las fronteras entre disciplinas no siempre corresponden a las fronteras de los problemas reales. Por ello, Quimera favorece la interacción entre campos como:
+            </p>
+            <ul>
+                <li>Medicina y ciencias de la salud.</li>
+                <li>Medicina genómica y biotecnología.</li>
+                <li>Medicina Basada en Evidencia.</li>
+                <li>Bioestadística y metodología de la investigación.</li>
+                <li>Medical Affairs.</li>
+                <li>Medical Writing y comunicación científica.</li>
+                <li>Interpretación médica.</li>
+                <li>Traducción médica y científica.</li>
+                <li>Educación y desarrollo profesional.</li>
+                <li>Inteligencia Artificial y tecnología aplicada al conocimiento.</li>
+            </ul>
+            <p>
+                La interdisciplinariedad de Quimera no significa mezclar disciplinas indiscriminadamente, sino conectarlas conservando el rigor, los métodos y los límites propios de cada una.
+            </p>
+
+            <h2>Conocimiento, metodología y aplicación</h2>
+            <p>
+                Quimera entiende que el conocimiento adquiere verdadero potencial cuando existe una relación coherente entre:
+            </p>
+            <div class="process-flow">
+                QUÉ SABEMOS &darr; CÓMO LO SABEMOS &darr; CÓMO LO COMPRENDEMOS &darr; CÓMO LO APLICAMOS &darr; QUÉ RESULTADOS OBTENEMOS
+            </div>
+            <p>
+                Por ello, la metodología constituye un componente transversal de su desarrollo. Investigar, analizar, enseñar, interpretar, traducir, comunicar o intervenir son actividades diferentes; sin embargo, todas requieren procesos que permitan fundamentar decisiones y evaluar sus consecuencias.
+            </p>
+
+            <h2>Del conocimiento a la transferencia</h2>
+            <p>
+                Una de las funciones centrales de Quimera es la transferencia del conocimiento. Esto significa convertir conocimiento especializado en recursos capaces de llegar a quienes pueden utilizarlo:
+            </p>
+            <ul>
+                <li>Profesionales.</li>
+                <li>Investigadores.</li>
+                <li>Docentes.</li>
+                <li>Estudiantes.</li>
+                <li>Intérpretes.</li>
+                <li>Traductores.</li>
+                <li>Comunicadores.</li>
+                <li>Organizaciones.</li>
+                <li>Comunidades relacionadas con la salud.</li>
+            </ul>
+            <p>
+                Esta transferencia puede materializarse mediante: investigación, cursos, series pedagógicas, guías, publicaciones, infografías, herramientas, metodologías, recursos digitales y servicios profesionales.
+            </p>
+
+            <h2>C³ Nexus</h2>
+            <p>
+                Dentro del ecosistema Quimera se desarrolla <strong>C³ Nexus</strong>, concebido como una infraestructura digital para conectar, organizar, desarrollar y transferir conocimiento.
+            </p>
+            <p>
+                A través de C³ Nexus podrán converger recursos educativos, publicaciones, series pedagógicas, guías, herramientas, bases de conocimiento y otros desarrollos digitales.
+            </p>
+            <p>
+                Así: <strong>Quimera constituye el ecosistema; C³ Nexus constituye una de sus principales infraestructuras digitales de conexión y transferencia del conocimiento.</strong>
+            </p>
+
+            <h2>Una estructura en evolución</h2>
+            <p>
+                Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve.
+            </p>
+            <p>
+                Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar.
+            </p>
+            <p>
+                Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable.
+            </p>
+        </article>
+
+    </main>
+
+    <!-- Pie de Página Estandarizado -->
+    <footer>
+        <p>&copy; 2026 Instituto Quimera &bull; Centro de Investigación, Docencia, Servicio y Difusión.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #ffffff;">Dr.C. Cesar Cerezo Camacho. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
