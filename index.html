@@ -549,8 +549,17 @@
                                     i++;
                                     setTimeout(typingP, 12);
                                 } else {
-                                    if (!isLast) {
-                                        cursor.remove();
+                                    // Solución para limpiar correctamente el cursor en párrafos HTML si no son el último elemento
+                                    if (isHTML) {
+                                        if (isLast) {
+                                            child.innerHTML = text + cursor.outerHTML;
+                                        } else {
+                                            child.innerHTML = text;
+                                        }
+                                    } else {
+                                        if (!isLast) {
+                                            cursor.remove();
+                                        }
                                     }
                                     index++;
                                     setTimeout(processNext, 150);
