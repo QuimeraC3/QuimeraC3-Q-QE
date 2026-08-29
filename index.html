@@ -232,7 +232,7 @@
             font-family: Georgia, "Times New Roman", serif;
             font-size: 1.5rem;
             color: var(--primary);
-            margin-top: 1.5rem;
+            margin-top: 3rem; /* Espacio extra entre el final de una sección y el título siguiente */
             margin-bottom: 1rem;
             padding-bottom: 0.4rem;
             border-bottom: 1px solid var(--border-color);
@@ -599,7 +599,6 @@
                                 function typingLi() {
                                     if (i < text.length) {
                                         li.innerHTML = text.substring(0, i + 1);
-                                        li.endswith = cursor.outerHTML; // solo asignación normal
                                         li.appendChild(cursor);
                                         i++;
                                         setTimeout(typingLi, 12);
