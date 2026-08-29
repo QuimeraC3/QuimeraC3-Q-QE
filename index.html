@@ -505,7 +505,7 @@
                     contentBox.classList.add('active');
                     isTyping = true;
 
-                    // Recolectar todos los hijos relevantes (párrafos y elementos extra como listas o divs)
+                    // Recolectar todos los elementos hijos (párrafos, listas UL y otros contenedores)
                     const children = Array.from(contentBox.children);
                     let cursor = document.createElement('span');
                     cursor.className = 'typewriter-cursor';
@@ -549,7 +549,6 @@
                                     i++;
                                     setTimeout(typingP, 12);
                                 } else {
-                                    // Solución para limpiar correctamente el cursor en párrafos HTML si no son el último elemento
                                     if (isHTML) {
                                         if (isLast) {
                                             child.innerHTML = text + cursor.outerHTML;
@@ -567,8 +566,51 @@
                             }
                             typingP();
 
+                        } else if (child.tagName === 'UL') {
+                            // Soporte y animación letra por letra para cada bullet (LI)
+                            child.style.display = 'block';
+                            const liItems = Array.from(child.children);
+                            let liIndex = 0;
+                            let isLastChild = (index === children.length - 1);
+
+                            function processNextLi() {
+                                if (liIndex >= liItems.length) {
+                                    index++;
+                                    setTimeout(processNext, 150);
+                                    return;
+                                }
+
+                                let li = liItems[liIndex];
+                                if (!li.dataset.text) {
+                                    li.dataset.text = li.textContent;
+                                }
+                                let text = li.dataset.text;
+                                let isLastLi = (isLastChild && liIndex === liItems.length - 1);
+
+                                let i = 0;
+                                li.innerHTML = "";
+                                li.appendChild(cursor);
+
+                                function typingLi() {
+                                    if (i < text.length) {
+                                        li.innerHTML = text.substring(0, i + 1);
+                                        li.appendChild(cursor);
+                                        i++;
+                                        setTimeout(typingLi, 12);
+                                    } else {
+                                        if (!isLastLi) {
+                                            cursor.remove();
+                                        }
+                                        liIndex++;
+                                        setTimeout(processNextLi, 100);
+                                    }
+                                }
+                                typingLi();
+                            }
+                            processNextLi();
+
                         } else {
-                            // Elementos extra (UL o DIV con process-flow)
+                            // Elementos extra (DIV con process-flow u otros)
                             child.style.display = 'block';
                             index++;
                             setTimeout(processNext, 200);
