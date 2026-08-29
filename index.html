@@ -29,6 +29,42 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
+            transition: filter 0.6s ease, background-color 0.6s ease;
+        }
+
+        /* -------------------------------------------------- */
+        /* CAPA DE DIFUMINADO / TRANSICIÓN EN BLANCO          */
+        /* -------------------------------------------------- */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #ffffff;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.8s ease, backdrop-filter 0.8s ease;
+        }
+
+        #intro-overlay.fade-out {
+            opacity: 0;
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+        }
+
+        body.blurred-page {
+            pointer-events: none;
+        }
+        
+        body.blurred-page #intro-overlay {
+            opacity: 1;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: opacity 0.6s ease, backdrop-filter 0.6s ease;
         }
 
         /* -------------------------------------------------- */
@@ -84,7 +120,7 @@
         }
 
         /* -------------------------------------------------- */
-        /* ENCABEZADO CON IMAGEN Y SOMBRA BALANCEADA          */
+        /* ENCABEZADO CON EFECTO SECUENCIAL EN LETRAS         */
         /* -------------------------------------------------- */
         header {
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.10)), url('Quimera.png');
@@ -121,6 +157,50 @@
             text-transform: uppercase;
         }
 
+        header h1 a {
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .quimera-letter {
+            display: inline-block;
+            color: #ffffff;
+            transition: color 0.25s ease;
+        }
+
+        /* Retorno a blanco */
+        header h1 a .char-1  { transition-delay: 0.0s; }
+        header h1 a .char-2  { transition-delay: 0.03s; }
+        header h1 a .char-3  { transition-delay: 0.06s; }
+        header h1 a .char-4  { transition-delay: 0.09s; }
+        header h1 a .char-5  { transition-delay: 0.12s; }
+        header h1 a .char-6  { transition-delay: 0.15s; }
+        header h1 a .char-7  { transition-delay: 0.18s; }
+        header h1 a .char-8  { transition-delay: 0.21s; }
+        header h1 a .char-9  { transition-delay: 0.24s; }
+        header h1 a .char-10 { transition-delay: 0.27s; }
+        header h1 a .char-11 { transition-delay: 0.30s; }
+        header h1 a .char-12 { transition-delay: 0.33s; }
+        header h1 a .char-13 { transition-delay: 0.36s; }
+        header h1 a .char-14 { transition-delay: 0.39s; }
+
+        /* Cambio a rojo */
+        header h1 a:hover .char-14 { transition-delay: 0.0s; color: #dc2626; }
+        header h1 a:hover .char-13 { transition-delay: 0.03s; color: #dc2626; }
+        header h1 a:hover .char-12 { transition-delay: 0.06s; color: #dc2626; }
+        header h1 a:hover .char-11 { transition-delay: 0.09s; color: #dc2626; }
+        header h1 a:hover .char-10 { transition-delay: 0.12s; color: #dc2626; }
+        header h1 a:hover .char-9  { transition-delay: 0.15s; color: #dc2626; }
+        header h1 a:hover .char-8  { transition-delay: 0.18s; color: #dc2626; }
+        header h1 a:hover .char-7  { transition-delay: 0.21s; color: #dc2626; }
+        header h1 a:hover .char-6  { transition-delay: 0.24s; color: #dc2626; }
+        header h1 a:hover .char-5  { transition-delay: 0.27s; color: #dc2626; }
+        header h1 a:hover .char-4  { transition-delay: 0.30s; color: #dc2626; }
+        header h1 a:hover .char-3  { transition-delay: 0.33s; color: #dc2626; }
+        header h1 a:hover .char-2  { transition-delay: 0.36s; color: #dc2626; }
+        header h1 a:hover .char-1  { transition-delay: 0.39s; color: #dc2626; }
+
         header p {
             font-size: 1.15rem;
             color: #ffffff;
@@ -131,7 +211,7 @@
         }
 
         /* -------------------------------------------------- */
-        /* CONTENIDO                                          */
+        /* CONTENIDO Y EFECTO MÁQUINA DE ESCRIBIR             */
         /* -------------------------------------------------- */
         .container {
             max-width: 900px;
@@ -162,11 +242,50 @@
             margin-top: 0;
         }
 
+        /* Estilo interactivo para el encabezado desplegable */
+        .typewriter-toggle {
+            cursor: pointer;
+            color: var(--primary);
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.2s ease;
+        }
+
+        .typewriter-toggle:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Contenedor del texto mecanografiado */
+        #typewriter-content {
+            display: none;
+        }
+
+        #typewriter-content.active {
+            display: block;
+        }
+
         .info-panel p {
             color: var(--text-main);
             margin-bottom: 1.25rem;
             font-size: 1.05rem;
             line-height: 1.7;
+        }
+
+        /* Cursor parpadeante estilo máquina de escribir */
+        .typewriter-cursor {
+            display: inline-block;
+            background-color: var(--primary);
+            width: 8px;
+            height: 1.1rem;
+            vertical-align: middle;
+            margin-left: 2px;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         .info-panel ul, .info-panel ol {
@@ -221,12 +340,14 @@
 </head>
 <body>
 
+    <!-- Capa de difuminado inicial/final -->
+    <div id="intro-overlay"></div>
+
     <!-- Barrita de navegación estandarizada -->
     <nav class="top-bar">
         <div class="top-bar-container">
             <a href="https://quimerac3.github.io/" class="brand-logo">QUIMERA - Inicio General</a>
             <ul class="nav-links">
-                <li><a href="https://quimerac3.github.io/QuimeraC3-Q/">QUIMERA Oculta</a></li>
             </ul>
         </div>
     </nav>
@@ -234,23 +355,20 @@
     <!-- Encabezado Principal -->
     <header>
         <span class="vol-badge">&bull; Ecosistema Quimera &bull;</span>
-        <h1>¿QUÉ ES QUIMERA?</h1>
+        <h1><a href="https://quimerac3.github.io/QuimeraC3-Q/"><span class="quimera-letter char-1">¿</span><span class="quimera-letter char-2">Q</span><span class="quimera-letter char-3">U</span><span class="quimera-letter char-4">É</span> <span class="quimera-letter char-5">E</span><span class="quimera-letter char-6">S</span> <span class="quimera-letter char-7">Q</span><span class="quimera-letter char-8">U</span><span class="quimera-letter char-9">I</span><span class="quimera-letter char-10">M</span><span class="quimera-letter char-11">E</span><span class="quimera-letter char-12">R</span><span class="quimera-letter char-13">A</span><span class="quimera-letter char-14">?</span></a></h1>
         <p>Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.</p>
     </header>
 
     <main class="container">
 
         <article class="info-panel">
-            <h2>Fundamentos del Ecosistema</h2>
-            <p>
-                Quimera es un ecosistema científico, académico y profesional dedicado a generar, integrar, desarrollar y transferir conocimiento.
-            </p>
-            <p>
-                Su propósito nace de una premisa sencilla: <strong>Los problemas complejos requieren algo más que conocimiento especializado. Requieren la capacidad de conectar conocimientos.</strong>
-            </p>
-            <p>
-                Por ello, Quimera reúne diferentes disciplinas, metodologías y campos profesionales relacionados con la ciencia, la salud, la medicina, la comunicación, el lenguaje, la educación y la tecnología, creando un espacio en el que el conocimiento puede ser estudiado, cuestionado, organizado, enseñado y aplicado.
-            </p>
+            <h2><a href="javascript:void(0);" id="toggle-trigger" class="typewriter-toggle">Fundamentos del Ecosistema</a></h2>
+            
+            <div id="typewriter-content">
+                <p id="tw-p1"></p>
+                <p id="tw-p2"></p>
+                <p id="tw-p3"></p>
+            </div>
 
             <h2>Más que información: conocimiento con propósito</h2>
             <p>
@@ -346,6 +464,127 @@
         <p>&copy; 2026 Instituto Quimera &bull; Centro de Investigación, Docencia, Servicio y Difusión.</p>
         <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #ffffff;">Dr.C. Cesar Cerezo Camacho. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        // 1. Efecto al ingresar a la página (desvanece el overlay inicial)
+        window.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('intro-overlay');
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+            }, 1000); 
+        });
+
+        // 2. Efecto de salida desvanecida al hacer clic en enlaces
+        const allLinks = document.querySelectorAll('a[href]');
+        allLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#') || href.startsWith('javascript:') || this.target === '_blank') {
+                    return; 
+                }
+
+                e.preventDefault(); 
+                const targetUrl = this.href;
+                
+                document.body.classList.add('blurred-page');
+                
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 600); 
+            });
+        });
+
+        // 3. Limpieza de estado de caché al retroceder (bfcache)
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                document.body.classList.remove('blurred-page');
+                const overlay = document.getElementById('intro-overlay');
+                if (overlay) {
+                    overlay.classList.add('fade-out');
+                }
+            }
+        });
+
+        // 4. Efecto de Máquina de Escribir para "Fundamentos del Ecosistema"
+        const trigger = document.getElementById('toggle-trigger');
+        const contentBox = document.getElementById('typewriter-content');
+        let isTyped = false;
+        let isTyping = false;
+
+        const p1Text = "Quimera es un ecosistema científico, académico y profesional dedicado a generar, integrar, desarrollar y transferir conocimiento.";
+        const p2TextHTML = "Su propósito nace de una premisa sencilla: <strong>Los problemas complejos requieren algo más que conocimiento especializado. Requieren la capacidad de conectar conocimientos.</strong>";
+        const p3Text = "Por ello, Quimera reúne diferentes disciplinas, metodologías y campos profesionales relacionados con la ciencia, la salud, la medicina, la comunicación, el lenguaje, la educación y la tecnología, creando un espacio en el que el conocimiento puede ser estudiado, cuestionado, organizado, enseñado y aplicado.";
+
+        trigger.addEventListener('click', () => {
+            if (isTyping) return; // Evitar múltiples clics mientras escribe
+
+            if (!isTyped) {
+                contentBox.classList.add('active');
+                isTyping = true;
+                
+                const el1 = document.getElementById('tw-p1');
+                const el2 = document.getElementById('tw-p2');
+                const el3 = document.getElementById('tw-p3');
+
+                let cursor = document.createElement('span');
+                cursor.className = 'typewriter-cursor';
+
+                // Función recursiva para escribir carácter por carácter con soporte básico de etiquetas
+                function typeWriter(element, text, isHTML = false, callback) {
+                    let i = 0;
+                    element.innerHTML = "";
+                    element.appendChild(cursor);
+
+                    function typing() {
+                        if (i < text.length) {
+                            if (isHTML && text.charAt(i) === '<') {
+                                // Manejo rápido para evitar romper etiquetas HTML internas como <strong>
+                                let closeIdx = text.indexOf('>', i);
+                                if (closeIdx !== -1) {
+                                    i = closeIdx + 1;
+                                }
+                            }
+                            
+                            // Insertar texto antes del cursor
+                            if (isHTML) {
+                                element.innerHTML = text.substring(0, i + 1) + cursor.outerHTML;
+                            } else {
+                                element.innerHTML = text.substring(0, i + 1);
+                                element.appendChild(cursor);
+                            }
+                            i++;
+                            setTimeout(typing, 12); // Velocidad de tecleo
+                        } else {
+                            cursor.remove();
+                            if (callback) callback();
+                        }
+                    }
+                    typing();
+                }
+
+                // Secuencia encadenada de los tres párrafos
+                typeWriter(el1, p1Text, false, () => {
+                    typeWriter(el2, p2TextHTML, true, () => {
+                        typeWriter(el3, p3Text, false, () => {
+                            isTyping = false;
+                            isTyped = true;
+                            trigger.textContent = "Fundamentos del Ecosistema (Ocultar / Mostrar)";
+                        });
+                    });
+                });
+
+            } else {
+                // Alternar visibilidad si ya se escribió al menos una vez
+                if (contentBox.style.display === "none") {
+                    contentBox.style.display = "block";
+                    trigger.textContent = "Fundamentos del Ecosistema (Ocultar / Mostrar)";
+                } else {
+                    contentBox.style.display = "none";
+                    trigger.textContent = "Fundamentos del Ecosistema (Mostrar de nuevo)";
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
