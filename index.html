@@ -120,7 +120,7 @@
         }
 
         /* -------------------------------------------------- */
-        /* ENCABEZADO CON EFECTO SECUENCIAL EN LETRAS         */
+        /* ENCABEZADO PRINCIPAL                               */
         /* -------------------------------------------------- */
         header {
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.10)), url('Quimera.png');
@@ -242,7 +242,7 @@
             margin-top: 0;
         }
 
-        /* Estilo interactivo para el encabezado desplegable */
+        /* Estilo interactivo para los encabezados desplegables */
         .typewriter-toggle {
             cursor: pointer;
             color: var(--primary);
@@ -256,12 +256,12 @@
             text-decoration: underline;
         }
 
-        /* Contenedor del texto mecanografiado */
-        #typewriter-content {
+        /* Contenedores de contenido ocultos inicialmente */
+        .typewriter-content {
             display: none;
         }
 
-        #typewriter-content.active {
+        .typewriter-content.active {
             display: block;
         }
 
@@ -362,99 +362,83 @@
     <main class="container">
 
         <article class="info-panel">
-            <h2><a href="javascript:void(0);" id="toggle-trigger" class="typewriter-toggle">Fundamentos del Ecosistema</a></h2>
-            
-            <div id="typewriter-content">
-                <p id="tw-p1"></p>
-                <p id="tw-p2"></p>
-                <p id="tw-p3"></p>
+            <!-- SECCIÓN 1 -->
+            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-1">Fundamentos del Ecosistema</a></h2>
+            <div id="sec-1" class="typewriter-content">
+                <p class="tw-p" data-text="Quimera es un ecosistema científico, académico y profesional dedicado a generar, integrar, desarrollar y transferir conocimiento."></p>
+                <p class="tw-p" data-html="true" data-text="Su propósito nace de una premisa sencilla: <strong>Los problemas complejos requieren algo más que conocimiento especializado. Requieren la capacidad de conectar conocimientos.</strong>"></p>
+                <p class="tw-p" data-text="Por ello, Quimera reúne diferentes disciplinas, metodologías y campos profesionales relacionados con la ciencia, la salud, la medicina, la comunicación, el lenguaje, la educación y la tecnología, creando un espacio en el que el conocimiento puede ser estudiado, cuestionado, organizado, enseñado y aplicado."></p>
             </div>
 
-            <h2>Más que información: conocimiento con propósito</h2>
-            <p>
-                Quimera no busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable.
-            </p>
-            <p>
-                Para ello, cada proyecto puede recorrer un proceso continuo:
-            </p>
-            <div class="process-flow">
-                PREGUNTA &rarr; INVESTIGACIÓN &rarr; ANÁLISIS &rarr; CONOCIMIENTO &rarr; DESARROLLO &rarr; FORMACIÓN &rarr; APLICACIÓN &rarr; EVALUACIÓN
+            <!-- SECCIÓN 2 -->
+            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-2">Más que información: conocimiento con propósito</a></h2>
+            <div id="sec-2" class="typewriter-content">
+                <p class="tw-p" data-text="Quimera no busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable."></p>
+                <p class="tw-p" data-text="Para ello, cada proyecto puede recorrer un proceso continuo:"></p>
+                <div class="process-flow tw-extra" style="display:none;">PREGUNTA &rarr; INVESTIGACIÓN &rarr; ANÁLISIS &rarr; CONOCIMIENTO &rarr; DESARROLLO &rarr; FORMACIÓN &rarr; APLICACIÓN &rarr; EVALUACIÓN</div>
+                <p class="tw-p" data-text="De esta manera, la investigación puede convertirse en formación; la formación, en práctica; y la práctica, nuevamente, en nuevas preguntas que impulsen el conocimiento."></p>
             </div>
-            <p>
-                De esta manera, la investigación puede convertirse en formación; la formación, en práctica; y la práctica, nuevamente, en nuevas preguntas que impulsen el conocimiento.
-            </p>
 
-            <h2>Un espacio interdisciplinario</h2>
-            <p>
-                Las fronteras entre disciplinas no siempre corresponden a las fronteras de los problemas reales. Por ello, Quimera favorece la interacción entre campos como:
-            </p>
-            <ul>
-                <li>Medicina y ciencias de la salud.</li>
-                <li>Medicina genómica y biotecnología.</li>
-                <li>Medicina Basada en Evidencia.</li>
-                <li>Bioestadística y metodología de la investigación.</li>
-                <li>Medical Affairs.</li>
-                <li>Medical Writing y comunicación científica.</li>
-                <li>Interpretación médica.</li>
-                <li>Traducción médica y científica.</li>
-                <li>Educación y desarrollo profesional.</li>
-                <li>Inteligencia Artificial y tecnología aplicada al conocimiento.</li>
-            </ul>
-            <p>
-                La interdisciplinariedad de Quimera no significa mezclar disciplinas indiscriminadamente, sino conectarlas conservando el rigor, los métodos y los límites propios de cada una.
-            </p>
-
-            <h2>Conocimiento, metodología y aplicación</h2>
-            <p>
-                Quimera entiende que el conocimiento adquiere verdadero potencial cuando existe una relación coherente entre:
-            </p>
-            <div class="process-flow">
-                QUÉ SABEMOS &darr; CÓMO LO SABEMOS &darr; CÓMO LO COMPRENDEMOS &darr; CÓMO LO APLICAMOS &darr; QUÉ RESULTADOS OBTENEMOS
+            <!-- SECCIÓN 3 -->
+            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-3">Un espacio interdisciplinario</a></h2>
+            <div id="sec-3" class="typewriter-content">
+                <p class="tw-p" data-text="Las fronteras entre disciplinas no siempre corresponden a las fronteras de los problemas reales. Por ello, Quimera favorece la interacción entre campos como:"></p>
+                <ul class="tw-extra" style="display:none; padding-left: 1.25rem; margin-bottom: 1.25rem;">
+                    <li>Medicina y ciencias de la salud.</li>
+                    <li>Medicina genómica y biotecnología.</li>
+                    <li>Medicina Basada en Evidencia.</li>
+                    <li>Bioestadística y metodología de la investigación.</li>
+                    <li>Medical Affairs.</li>
+                    <li>Medical Writing y comunicación científica.</li>
+                    <li>Interpretación médica.</li>
+                    <li>Traducción médica y científica.</li>
+                    <li>Educación y desarrollo profesional.</li>
+                    <li>Inteligencia Artificial y tecnología aplicada al conocimiento.</li>
+                </ul>
+                <p class="tw-p" data-text="La interdisciplinariedad de Quimera no significa mezclar disciplinas indiscriminadamente, sino conectarlas conservando el rigor, los métodos y los límites propios de cada una."></p>
             </div>
-            <p>
-                Por ello, la metodología constituye un componente transversal de su desarrollo. Investigar, analizar, enseñar, interpretar, traducir, comunicar o intervenir son actividades diferentes; sin embargo, todas requieren procesos que permitan fundamentar decisiones y evaluar sus consecuencias.
-            </p>
 
-            <h2>Del conocimiento a la transferencia</h2>
-            <p>
-                Una de las funciones centrales de Quimera es la transferencia del conocimiento. Esto significa convertir conocimiento especializado en recursos capaces de llegar a quienes pueden utilizarlo:
-            </p>
-            <ul>
-                <li>Profesionales.</li>
-                <li>Investigadores.</li>
-                <li>Docentes.</li>
-                <li>Estudiantes.</li>
-                <li>Intérpretes.</li>
-                <li>Traductores.</li>
-                <li>Comunicadores.</li>
-                <li>Organizaciones.</li>
-                <li>Comunidades relacionadas con la salud.</li>
-            </ul>
-            <p>
-                Esta transferencia puede materializarse mediante: investigación, cursos, series pedagógicas, guías, publicaciones, infografías, herramientas, metodologías, recursos digitales y servicios profesionales.
-            </p>
+            <!-- SECCIÓN 4 -->
+            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-4">Conocimiento, metodología y aplicación</a></h2>
+            <div id="sec-4" class="typewriter-content">
+                <p class="tw-p" data-text="Quimera entiende que el conocimiento adquiere verdadero potencial cuando existe una relación coherente entre:"></p>
+                <div class="process-flow tw-extra" style="display:none;">QUÉ SABEMOS &darr; CÓMO LO SABEMOS &darr; CÓMO LO COMPRENDEMOS &darr; CÓMO LO APLICAMOS &darr; QUÉ RESULTADOS OBTENEMOS</div>
+                <p class="tw-p" data-text="Por ello, la metodología constituye un componente transversal de su desarrollo. Investigar, analizar, enseñar, interpretar, traducir, comunicar o intervenir son actividades diferentes; sin embargo, todas requieren procesos que permitan fundamentar decisiones y evaluar sus consecuencias."></p>
+            </div>
 
-            <h2>C³ Nexus</h2>
-            <p>
-                Dentro del ecosistema Quimera se desarrolla <strong>C³ Nexus</strong>, concebido como una infraestructura digital para conectar, organizar, desarrollar y transferir conocimiento.
-            </p>
-            <p>
-                A través de C³ Nexus podrán converger recursos educativos, publicaciones, series pedagógicas, guías, herramientas, bases de conocimiento y otros desarrollos digitales.
-            </p>
-            <p>
-                Así: <strong>Quimera constituye el ecosistema; C³ Nexus constituye una de sus principales infraestructuras digitales de conexión y transferencia del conocimiento.</strong>
-            </p>
+            <!-- SECCIÓN 5 -->
+            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-5">Del conocimiento a la transferencia</a></h2>
+            <div id="sec-5" class="typewriter-content">
+                <p class="tw-p" data-text="Una de las funciones centrales de Quimera es la transferencia del conocimiento. Esto significa convertir conocimiento especializado en recursos capaces de llegar a quienes pueden utilizarlo:"></p>
+                <ul class="tw-extra" style="display:none; padding-left: 1.25rem; margin-bottom: 1.25rem;">
+                    <li>Profesionales.</li>
+                    <li>Investigadores.</li>
+                    <li>Docentes.</li>
+                    <li>Estudiantes.</li>
+                    <li>Intérpretes.</li>
+                    <li>Traductores.</li>
+                    <li>Comunicadores.</li>
+                    <li>Organizaciones.</li>
+                    <li>Comunidades relacionadas con la salud.</li>
+                </ul>
+                <p class="tw-p" data-text="Esta transferencia puede materializarse mediante: investigación, cursos, series pedagógicas, guías, publicaciones, infografías, herramientas, metodologías, recursos digitales y servicios profesionales."></p>
+            </div>
 
-            <h2>Una estructura en evolución</h2>
-            <p>
-                Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve.
-            </p>
-            <p>
-                Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar.
-            </p>
-            <p>
-                Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable.
-            </p>
+            <!-- SECCIÓN 6 -->
+            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-6">C³ Nexus</a></h2>
+            <div id="sec-6" class="typewriter-content">
+                <p class="tw-p" data-html="true" data-text="Dentro del ecosistema Quimera se desarrolla <strong>C³ Nexus</strong>, concebido como una infraestructura digital para conectar, organizar, desarrollar y transferir conocimiento."></p>
+                <p class="tw-p" data-text="A través de C³ Nexus podrán converger recursos educativos, publicaciones, series pedagógicas, guías, herramientas, bases de conocimiento y otros desarrollos digitales."></p>
+                <p class="tw-p" data-html="true" data-text="Así: <strong>Quimera constituye el ecosistema; C³ Nexus constituye una de sus principales infraestructuras digitales de conexión y transferencia del conocimiento.</strong>"></p>
+            </div>
+
+            <!-- SECCIÓN 7 -->
+            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-7">Una estructura en evolución</a></h2>
+            <div id="sec-7" class="typewriter-content">
+                <p class="tw-p" data-text="Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve."></p>
+                <p class="tw-p" data-text="Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar."></p>
+                <p class="tw-p" data-text="Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable."></p>
+            </div>
         </article>
 
     </main>
@@ -474,7 +458,7 @@
             }, 1000); 
         });
 
-        // 2. Efecto de salida desvanecida al hacer clic en enlaces
+        // 2. Efecto de salida desvanecida al hacer clic en enlaces de navegación
         const allLinks = document.querySelectorAll('a[href]');
         allLinks.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -505,84 +489,94 @@
             }
         });
 
-        // 4. Efecto de Máquina de Escribir para "Fundamentos del Ecosistema"
-        const trigger = document.getElementById('toggle-trigger');
-        const contentBox = document.getElementById('typewriter-content');
-        let isTyped = false;
-        let isTyping = false;
+        // 4. Lógica generalizada del Efecto de Máquina de Escribir para cada sección
+        const toggles = document.querySelectorAll('.typewriter-toggle');
 
-        const p1Text = "Quimera es un ecosistema científico, académico y profesional dedicado a generar, integrar, desarrollar y transferir conocimiento.";
-        const p2TextHTML = "Su propósito nace de una premisa sencilla: <strong>Los problemas complejos requieren algo más que conocimiento especializado. Requieren la capacidad de conectar conocimientos.</strong>";
-        const p3Text = "Por ello, Quimera reúne diferentes disciplinas, metodologías y campos profesionales relacionados con la ciencia, la salud, la medicina, la comunicación, el lenguaje, la educación y la tecnología, creando un espacio en el que el conocimiento puede ser estudiado, cuestionado, organizado, enseñado y aplicado.";
+        toggles.forEach(trigger => {
+            const targetId = trigger.getAttribute('data-target');
+            const contentBox = document.getElementById(targetId);
+            let isTyped = false;
+            let isTyping = false;
 
-        trigger.addEventListener('click', () => {
-            if (isTyping) return; // Evitar múltiples clics mientras escribe
+            trigger.addEventListener('click', () => {
+                if (isTyping) return;
 
-            if (!isTyped) {
-                contentBox.classList.add('active');
-                isTyping = true;
-                
-                const el1 = document.getElementById('tw-p1');
-                const el2 = document.getElementById('tw-p2');
-                const el3 = document.getElementById('tw-p3');
+                if (!isTyped) {
+                    contentBox.classList.add('active');
+                    isTyping = true;
 
-                let cursor = document.createElement('span');
-                cursor.className = 'typewriter-cursor';
+                    // Recolectar todos los hijos relevantes (párrafos y elementos extra como listas o divs)
+                    const children = Array.from(contentBox.children);
+                    let cursor = document.createElement('span');
+                    cursor.className = 'typewriter-cursor';
 
-                // Función recursiva para escribir carácter por carácter con soporte básico de etiquetas
-                function typeWriter(element, text, isHTML = false, callback) {
-                    let i = 0;
-                    element.innerHTML = "";
-                    element.appendChild(cursor);
+                    let index = 0;
 
-                    function typing() {
-                        if (i < text.length) {
-                            if (isHTML && text.charAt(i) === '<') {
-                                // Manejo rápido para evitar romper etiquetas HTML internas como <strong>
-                                let closeIdx = text.indexOf('>', i);
-                                if (closeIdx !== -1) {
-                                    i = closeIdx + 1;
-                                }
-                            }
-                            
-                            // Insertar texto antes del cursor
-                            if (isHTML) {
-                                element.innerHTML = text.substring(0, i + 1) + cursor.outerHTML;
-                            } else {
-                                element.innerHTML = text.substring(0, i + 1);
-                                element.appendChild(cursor);
-                            }
-                            i++;
-                            setTimeout(typing, 12); // Velocidad de tecleo
-                        } else {
-                            cursor.remove();
-                            if (callback) callback();
-                        }
-                    }
-                    typing();
-                }
-
-                // Secuencia encadenada de los tres párrafos
-                typeWriter(el1, p1Text, false, () => {
-                    typeWriter(el2, p2TextHTML, true, () => {
-                        typeWriter(el3, p3Text, false, () => {
+                    function processNext() {
+                        if (index >= children.length) {
                             isTyping = false;
                             isTyped = true;
-                            trigger.textContent = "Fundamentos del Ecosistema (Ocultar / Mostrar)";
-                        });
-                    });
-                });
+                            trigger.textContent += " (Ocultar / Mostrar)";
+                            return;
+                        }
 
-            } else {
-                // Alternar visibilidad si ya se escribió al menos una vez
-                if (contentBox.style.display === "none") {
-                    contentBox.style.display = "block";
-                    trigger.textContent = "Fundamentos del Ecosistema (Ocultar / Mostrar)";
+                        let child = children[index];
+
+                        if (child.tagName === 'P') {
+                            let text = child.getAttribute('data-text');
+                            let isHTML = child.getAttribute('data-html') === 'true';
+                            let isLast = (index === children.length - 1);
+                            
+                            let i = 0;
+                            child.innerHTML = "";
+                            child.appendChild(cursor);
+
+                            function typingP() {
+                                if (i < text.length) {
+                                    if (isHTML && text.charAt(i) === '<') {
+                                        let closeIdx = text.indexOf('>', i);
+                                        if (closeIdx !== -1) {
+                                            i = closeIdx + 1;
+                                        }
+                                    }
+
+                                    if (isHTML) {
+                                        child.innerHTML = text.substring(0, i + 1) + cursor.outerHTML;
+                                    } else {
+                                        child.innerHTML = text.substring(0, i + 1);
+                                        child.appendChild(cursor);
+                                    }
+                                    i++;
+                                    setTimeout(typingP, 12);
+                                } else {
+                                    if (!isLast) {
+                                        cursor.remove();
+                                    }
+                                    index++;
+                                    setTimeout(processNext, 150);
+                                }
+                            }
+                            typingP();
+
+                        } else {
+                            // Elementos extra (UL o DIV con process-flow)
+                            child.style.display = 'block';
+                            index++;
+                            setTimeout(processNext, 200);
+                        }
+                    }
+
+                    processNext();
+
                 } else {
-                    contentBox.style.display = "none";
-                    trigger.textContent = "Fundamentos del Ecosistema (Mostrar de nuevo)";
+                    // Alternar visibilidad si ya se generó la animación una vez
+                    if (contentBox.style.display === "none") {
+                        contentBox.style.display = "block";
+                    } else {
+                        contentBox.style.display = "none";
+                    }
                 }
-            }
+            });
         });
     </script>
 
