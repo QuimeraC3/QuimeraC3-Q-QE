@@ -567,9 +567,17 @@
                             typingP();
 
                         } else if (child.tagName === 'UL') {
-                            // Soporte y animación letra por letra para cada bullet (LI)
+                            // Mostrar contenedor UL e inmediatamente vaciar y ocultar todos los LIs para evitar que aparezcan fijos
                             child.style.display = 'block';
                             const liItems = Array.from(child.children);
+                            
+                            liItems.forEach(li => {
+                                if (!li.dataset.text) {
+                                    li.dataset.text = li.textContent.trim();
+                                }
+                                li.innerHTML = ""; // Vaciar para que no se muestren de golpe
+                            });
+
                             let liIndex = 0;
                             let isLastChild = (index === children.length - 1);
 
@@ -581,14 +589,10 @@
                                 }
 
                                 let li = liItems[liIndex];
-                                if (!li.dataset.text) {
-                                    li.dataset.text = li.textContent;
-                                }
                                 let text = li.dataset.text;
                                 let isLastLi = (isLastChild && liIndex === liItems.length - 1);
 
                                 let i = 0;
-                                li.innerHTML = "";
                                 li.appendChild(cursor);
 
                                 function typingLi() {
