@@ -236,6 +236,7 @@
             margin-bottom: 1rem;
             padding-bottom: 0.4rem;
             border-bottom: 1px solid var(--border-color);
+            text-align: center; /* Títulos centrados */
         }
 
         .info-panel h2:first-of-type {
@@ -598,6 +599,7 @@
                                 function typingLi() {
                                     if (i < text.length) {
                                         li.innerHTML = text.substring(0, i + 1);
+                                        li.endswith = cursor.outerHTML; // solo asignación normal
                                         li.appendChild(cursor);
                                         i++;
                                         setTimeout(typingLi, 12);
