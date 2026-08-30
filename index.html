@@ -220,7 +220,10 @@
         }
 
         .info-panel {
-            background-color: var(--card-bg);
+            /* Imagen de fondo con una capa translúcida blanca (92% de opacidad) para asegurar legibilidad */
+            background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('Quimera Rombo.jpeg');
+            background-size: cover;
+            background-position: center center;
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 2.5rem;
@@ -582,7 +585,7 @@
                             let liIndex = 0;
                             let isLastChild = (index === children.length - 1);
 
-                            function processNextLi() {
+                            let processNextLi = function() {
                                 if (liIndex >= liItems.length) {
                                     index++;
                                     setTimeout(processNext, 150);
@@ -611,7 +614,7 @@
                                     }
                                 }
                                 typingLi();
-                            }
+                            };
                             processNextLi();
 
                         } else {
