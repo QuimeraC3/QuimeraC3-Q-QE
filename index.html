@@ -34,6 +34,36 @@
             flex-direction: column;
             justify-content: space-between;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Header Superior Izquierda */
+        .top-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 1.5rem 2rem;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .top-header.visible {
+            opacity: 1;
+        }
+
+        .top-header a {
+            color: #f8fafc;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: color 0.2s ease;
+        }
+
+        .top-header a:hover {
+            color: #38bdf8;
+            text-decoration: underline;
         }
 
         /* Capa de desvanecimiento inicial en negro (01 Fondo) */
@@ -99,8 +129,8 @@
             transition: color 0.4s ease;
         }
 
-        /* Subtítulo de texto (04) y caja de exploración (05) */
-        .subtitle-text, .exploration-box {
+        /* Subtítulo de texto (04) */
+        .subtitle-text {
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
@@ -110,19 +140,44 @@
             transition: opacity 0.8s ease;
         }
 
-        .subtitle-text.visible, .exploration-box.visible {
+        .subtitle-text.visible {
             opacity: 1;
         }
 
+        /* Recuadro de instrucciones interactivo ubicado arriba del footer (05) */
         .exploration-box {
+            max-width: 900px;
+            margin: 0 auto 1.5rem auto;
+            padding: 1.25rem 1.5rem;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.25rem 1.5rem;
             border-radius: 8px;
             font-size: 0.95rem;
             color: #cbd5e1;
-            margin-top: 1rem;
-            text-align: left;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            width: calc(100% - 3rem);
+        }
+
+        .exploration-box.visible {
+            opacity: 1;
+        }
+
+        .exploration-box p {
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        #exp-title {
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            min-height: 1.5em;
+        }
+
+        #exp-desc {
+            min-height: 3em;
         }
 
         /* Cursor de máquina de escribir */
@@ -253,10 +308,15 @@
 </head>
 <body>
 
+    <!-- Header con hipervínculo en la parte superior izquierda -->
+    <header class="top-header" id="top-header">
+        <a href="https://quimerac3.github.io/" id="header-link"></a>
+    </header>
+
     <!-- 01 La imagen de fondo (a través del desvanecimiento del overlay) -->
     <div id="intro-overlay"></div>
 
-    <!-- Contenedor Principal -->
+    <!-- Contenedor Principal Centrado -->
     <main class="main-wrapper">
         <!-- 02 El título ECOSISTEMA -->
         <h1 class="page-title" id="main-title"></h1>
@@ -266,9 +326,13 @@
 
         <!-- 04 El texto del subtítulo -->
         <div class="subtitle-text" id="sub-text"></div>
-        <!-- 05 El recuadro de las instrucciones de la exploración interactiva -->
-        <div class="exploration-box" id="exp-text"></div>
     </main>
+
+    <!-- 05 El recuadro de las instrucciones de la exploración interactiva (justo encima del footer) -->
+    <div class="exploration-box" id="exp-box">
+        <p id="exp-title"></p>
+        <p id="exp-desc"></p>
+    </div>
 
     <!-- 06 El footer y 07 El texto del footer -->
     <footer>
@@ -368,20 +432,32 @@
             }
         ];
 
+        const headerLinkString = "QUIMERA - Inicio General";
         const titleString = "ECOSISTEMA";
         const subTextString = "Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.";
-        const expTextString = "Exploración Interactiva del Ecosistema. Observe la animación superior en la palabra QUIMERA. Una vez que la palabra completa se torne de color blanco, cada letra parpadeará secuencialmente en rojo y blanco. Haga clic en la letra activa para abrir el recuadro central con su respectiva información fundamental.";
+        const expTitleString = "EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA.";
+        const expDescString = "Observe la animación superior en la palabra QUIMERA. Una vez que la palabra completa se torne de color blanco, cada letra parpadeará secuencialmente en rojo y blanco. Haga clic en la letra activa para abrir el recuadro central con su respectiva información fundamental.";
         const footer1String = "© 2026 Instituto Quimera • Centro de Investigación, Docencia, Servicio y Difusión.";
         const footer2String = "Dr.C. Cesar Cerezo Camacho. Todos los derechos reservados.";
 
         window.addEventListener('DOMContentLoaded', () => {
-            // 01. Desvanecimiento inicial desde negro (Fondo visible)
+            // 1. El header superior aparece lentamente
+            const topHeader = document.getElementById('top-header');
+            topHeader.classList.add('visible');
+
+            // 2. El texto del header con efecto de máquina de escribir, sin dejar cursor parpadeando al final
             setTimeout(() => {
-                document.getElementById('intro-overlay').classList.add('fade-out');
-                startSequence();
-            }, 500);
+                typeWriterNoCursor('header-link', headerLinkString, 35, () => {
+                    // 3. Después el resto de la animación comienza con la aparición de la imagen de fondo
+                    setTimeout(() => {
+                        document.getElementById('intro-overlay').classList.add('fade-out');
+                        startSequence();
+                    }, 500);
+                });
+            }, 600);
         });
 
+        // Función de máquina de escribir estándar (con cursor)
         function typeWriterSimple(elementId, text, speed, callback) {
             const el = document.getElementById(elementId);
             let i = 0;
@@ -404,10 +480,28 @@
             type();
         }
 
+        // Función de máquina de escribir sin cursor al finalizar
+        function typeWriterNoCursor(elementId, text, speed, callback) {
+            const el = document.getElementById(elementId);
+            let i = 0;
+            el.innerHTML = "";
+
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML = text.substring(0, i + 1);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    if (callback) callback();
+                }
+            }
+            type();
+        }
+
         function startSequence() {
-            // 02. El título "ECOSISTEMA" en efecto máquina de escribir
+            // El título "ECOSISTEMA" en efecto máquina de escribir
             typeWriterSimple('main-title', titleString, 40, () => {
-                // 03. El subtítulo "QUIMERA" aparece
+                // El subtítulo "QUIMERA" aparece
                 const quimeraContainer = document.getElementById('quimera-word');
                 quimeraContainer.classList.add('visible');
                 playQuimeraAppearance();
@@ -442,25 +536,27 @@
                     idx++;
                     setTimeout(showNextWhite, 200);
                 } else {
-                    // 04. El texto del subtítulo
+                    // El texto del subtítulo
                     const subEl = document.getElementById('sub-text');
                     subEl.classList.add('visible');
                     typeWriterSimple('sub-text', subTextString, 15, () => {
-                        // 05. El recuadro de las instrucciones de la exploración
-                        const expEl = document.getElementById('exp-text');
+                        // El recuadro de las instrucciones de la exploración
+                        const expEl = document.getElementById('exp-box');
                         expEl.classList.add('visible');
-                        typeWriterSimple('exp-text', expTextString, 10, () => {
-                            // 06. El footer aparece
-                            const footerEl = document.querySelector('footer');
-                            footerEl.classList.add('visible');
-                            setTimeout(() => {
-                                // 07. El texto del footer se escribe
-                                typeWriterSimple('footer-text-1', footer1String, 10, () => {
-                                    typeWriterSimple('footer-text-2', footer2String, 10, () => {
-                                        activateCurrentLetter();
+                        typeWriterSimple('exp-title', expTitleString, 15, () => {
+                            typeWriterSimple('exp-desc', expDescString, 10, () => {
+                                // El footer aparece
+                                const footerEl = document.querySelector('footer');
+                                footerEl.classList.add('visible');
+                                setTimeout(() => {
+                                    // El texto del footer se escribe
+                                    typeWriterSimple('footer-text-1', footer1String, 10, () => {
+                                        typeWriterSimple('footer-text-2', footer2String, 10, () => {
+                                            activateCurrentLetter();
+                                        });
                                     });
-                                });
-                            }, 400);
+                                }, 400);
+                            });
                         });
                     });
                 }
@@ -632,7 +728,7 @@
             wordContainer.onclick = () => {
                 clearInterval(globalBlinkInterval);
                 document.getElementById('intro-overlay').classList.remove('fade-out');
-                document.getElementById('intro-overlay').style.background = '#ffffff';
+                document.getElementById('intro-overlaystyle').background = '#ffffff';
                 document.getElementById('intro-overlay').style.opacity = '1';
                 setTimeout(() => {
                     window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
