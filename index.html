@@ -26,7 +26,6 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            /* IMAGEN DE FONDO POR FUERA DEL MARCO (En el fondo general de la página) */
             background: linear-gradient(rgba(248, 250, 252, 0.88), rgba(248, 250, 252, 0.88)), url('Quimera Rombo.jpeg');
             background-size: cover;
             background-position: center center;
@@ -153,57 +152,31 @@
 
         header h1 {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 2.4rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.05em;
             margin-bottom: 0.75rem;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
             text-transform: uppercase;
         }
 
-        header h1 a {
-            color: #ffffff;
-            text-decoration: none;
+        /* Letras interactivas de QUIMERA */
+        .q-letter {
+            opacity: 0;
             display: inline-block;
+            color: #dc2626;
+            transition: color 0.3s ease, opacity 0.5s ease;
         }
 
-        .quimera-letter {
-            display: inline-block;
-            color: #ffffff;
-            transition: color 0.25s ease;
+        @keyframes letterBlink {
+            0%, 50% { color: #dc2626; }
+            51%, 100% { color: #ffffff; }
         }
 
-        /* Retorno a blanco */
-        header h1 a .char-1  { transition-delay: 0.0s; }
-        header h1 a .char-2  { transition-delay: 0.03s; }
-        header h1 a .char-3  { transition-delay: 0.06s; }
-        header h1 a .char-4  { transition-delay: 0.09s; }
-        header h1 a .char-5  { transition-delay: 0.12s; }
-        header h1 a .char-6  { transition-delay: 0.15s; }
-        header h1 a .char-7  { transition-delay: 0.18s; }
-        header h1 a .char-8  { transition-delay: 0.21s; }
-        header h1 a .char-9  { transition-delay: 0.24s; }
-        header h1 a .char-10 { transition-delay: 0.27s; }
-        header h1 a .char-11 { transition-delay: 0.30s; }
-        header h1 a .char-12 { transition-delay: 0.33s; }
-        header h1 a .char-13 { transition-delay: 0.36s; }
-        header h1 a .char-14 { transition-delay: 0.39s; }
-
-        /* Cambio a rojo */
-        header h1 a:hover .char-14 { transition-delay: 0.0s; color: #dc2626; }
-        header h1 a:hover .char-13 { transition-delay: 0.03s; color: #dc2626; }
-        header h1 a:hover .char-12 { transition-delay: 0.06s; color: #dc2626; }
-        header h1 a:hover .char-11 { transition-delay: 0.09s; color: #dc2626; }
-        header h1 a:hover .char-10 { transition-delay: 0.12s; color: #dc2626; }
-        header h1 a:hover .char-9  { transition-delay: 0.15s; color: #dc2626; }
-        header h1 a:hover .char-8  { transition-delay: 0.18s; color: #dc2626; }
-        header h1 a:hover .char-7  { transition-delay: 0.21s; color: #dc2626; }
-        header h1 a:hover .char-6  { transition-delay: 0.24s; color: #dc2626; }
-        header h1 a:hover .char-5  { transition-delay: 0.27s; color: #dc2626; }
-        header h1 a:hover .char-4  { transition-delay: 0.30s; color: #dc2626; }
-        header h1 a:hover .char-3  { transition-delay: 0.33s; color: #dc2626; }
-        header h1 a:hover .char-2  { transition-delay: 0.36s; color: #dc2626; }
-        header h1 a:hover .char-1  { transition-delay: 0.39s; color: #dc2626; }
+        .q-letter.blinking {
+            animation: letterBlink 0.8s infinite;
+            cursor: pointer;
+        }
 
         header p {
             font-size: 1.15rem;
@@ -215,7 +188,7 @@
         }
 
         /* -------------------------------------------------- */
-        /* CONTENIDO Y EFECTO MÁQUINA DE ESCRIBIR             */
+        /* CONTENEDOR PRINCIPAL                               */
         /* -------------------------------------------------- */
         .container {
             max-width: 900px;
@@ -224,86 +197,87 @@
         }
 
         .info-panel {
-            /* Marco limpio de color blanco sólido, dejando la imagen de fondo por fuera */
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 2.5rem;
             box-shadow: var(--shadow-lg);
-            margin-bottom: 2rem;
+            text-align: center;
         }
 
         .info-panel h2 {
             font-family: Georgia, "Times New Roman", serif;
             font-size: 1.5rem;
             color: var(--primary);
-            margin-top: 3rem; /* Espacio extra entre el final de una sección y el título siguiente */
             margin-bottom: 1rem;
-            padding-bottom: 0.4rem;
-            border-bottom: 1px solid var(--border-color);
-            text-align: center; /* Títulos centrados */
-        }
-
-        .info-panel h2:first-of-type {
-            margin-top: 0;
-        }
-
-        /* Estilo interactivo para los encabezados desplegables */
-        .typewriter-toggle {
-            cursor: pointer;
-            color: var(--primary);
-            text-decoration: none;
-            display: inline-block;
-            transition: color 0.2s ease;
-        }
-
-        .typewriter-toggle:hover {
-            color: var(--primary-hover);
-            text-decoration: underline;
-        }
-
-        /* Contenedores de contenido ocultos inicialmente */
-        .typewriter-content {
-            display: none;
-        }
-
-        .typewriter-content.active {
-            display: block;
         }
 
         .info-panel p {
-            color: var(--text-main);
-            margin-bottom: 1.25rem;
+            color: var(--text-muted);
             font-size: 1.05rem;
             line-height: 1.7;
         }
 
-        /* Cursor parpadeante estilo máquina de escribir */
-        .typewriter-cursor {
-            display: inline-block;
-            background-color: var(--primary);
-            width: 8px;
-            height: 1.1rem;
-            vertical-align: middle;
-            margin-left: 2px;
-            animation: blink 0.8s infinite;
+        /* -------------------------------------------------- */
+        /* RECUADRO CENTRAL (MODAL)                           */
+        /* -------------------------------------------------- */
+        #central-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 9998;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
         }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+        #central-modal {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            position: relative;
         }
 
-        .info-panel ul, .info-panel ol {
-            padding-left: 1.25rem;
+        #modal-title {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        #modal-body {
             color: var(--text-main);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        #modal-body p {
             margin-bottom: 1.25rem;
         }
 
-        .info-panel li {
+        #modal-body ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        #modal-body li {
             margin-bottom: 0.75rem;
             font-size: 1.05rem;
-            line-height: 1.6;
         }
 
         .process-flow {
@@ -317,6 +291,23 @@
             margin: 1.5rem 0;
             color: var(--text-main);
             letter-spacing: 0.02em;
+        }
+
+        .modal-close-btn {
+            display: block;
+            width: fit-content;
+            margin: 1.5rem auto 0 auto;
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
         }
 
         /* -------------------------------------------------- */
@@ -341,6 +332,9 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
+            header h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -358,96 +352,38 @@
         </div>
     </nav>
 
-    <!-- Encabezado Principal -->
+    <!-- Encabezado Principal con la palabra Q U I M E R A animada -->
     <header>
         <span class="vol-badge">&bull; Ecosistema Quimera &bull;</span>
-        <h1><a href="https://quimerac3.github.io/QuimeraC3-Q/"><span class="quimera-letter char-1">¿</span><span class="quimera-letter char-2">Q</span><span class="quimera-letter char-3">U</span><span class="quimera-letter char-4">É</span> <span class="quimera-letter char-5">E</span><span class="quimera-letter char-6">S</span> <span class="quimera-letter char-7">Q</span><span class="quimera-letter char-8">U</span><span class="quimera-letter char-9">I</span><span class="quimera-letter char-10">M</span><span class="quimera-letter char-11">E</span><span class="quimera-letter char-12">R</span><span class="quimera-letter char-13">A</span><span class="quimera-letter char-14">?</span></a></h1>
+        <h1>
+            <span id="quimera-title">
+                <span class="q-letter" id="letter-Q">Q</span>&nbsp;
+                <span class="q-letter" id="letter-U">U</span>&nbsp;
+                <span class="q-letter" id="letter-I">I</span>&nbsp;
+                <span class="q-letter" id="letter-M">M</span>&nbsp;
+                <span class="q-letter" id="letter-E">E</span>&nbsp;
+                <span class="q-letter" id="letter-R">R</span>&nbsp;
+                <span class="q-letter" id="letter-A">A</span>
+            </span>
+        </h1>
         <p>Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.</p>
     </header>
 
     <main class="container">
-
-        <article class="info-panel">
-            <!-- SECCIÓN 1 -->
-            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-1">Fundamentos del Ecosistema.</a></h2>
-            <div id="sec-1" class="typewriter-content">
-                <p class="tw-p" data-text="Quimera es un ecosistema científico, académico y profesional dedicado a generar, integrar, desarrollar y transferir conocimiento."></p>
-                <p class="tw-p" data-html="true" data-text="Su propósito nace de una premisa sencilla: <strong>Los problemas complejos requieren algo más que conocimiento especializado. Requieren la capacidad de conectar conocimientos.</strong>"></p>
-                <p class="tw-p" data-text="Por ello, Quimera reúne diferentes disciplinas, metodologías y campos profesionales relacionados con la ciencia, la salud, la medicina, la comunicación, el lenguaje, la educación y la tecnología, creando un espacio en el que el conocimiento puede ser estudiado, cuestionado, organizado, enseñado y aplicado."></p>
-            </div>
-
-            <!-- SECCIÓN 2 -->
-            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-2">Más que información: conocimiento con propósito.</a></h2>
-            <div id="sec-2" class="typewriter-content">
-                <p class="tw-p" data-text="Quimera no busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable."></p>
-                <p class="tw-p" data-text="Para ello, cada proyecto puede recorrer un proceso continuo:"></p>
-                <div class="process-flow tw-extra" style="display:none;">PREGUNTA &rarr; INVESTIGACIÓN &rarr; ANÁLISIS &rarr; CONOCIMIENTO &rarr; DESARROLLO &rarr; FORMACIÓN &rarr; APLICACIÓN &rarr; EVALUACIÓN</div>
-                <p class="tw-p" data-text="De esta manera, la investigación puede convertirse en formación; la formación, en práctica; y la práctica, nuevamente, en nuevas preguntas que impulsen el conocimiento."></p>
-            </div>
-
-            <!-- SECCIÓN 3 -->
-            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-3">Un espacio interdisciplinario.</a></h2>
-            <div id="sec-3" class="typewriter-content">
-                <p class="tw-p" data-text="Las fronteras entre disciplinas no siempre corresponden a las fronteras de los problemas reales. Por ello, Quimera favorece la interacción entre campos como:"></p>
-                <ul class="tw-extra" style="display:none; padding-left: 1.25rem; margin-bottom: 1.25rem;">
-                    <li>Medicina y ciencias de la salud.</li>
-                    <li>Medicina genómica y biotecnología.</li>
-                    <li>Medicina Basada en Evidencia.</li>
-                    <li>Bioestadística y metodología de la investigación.</li>
-                    <li>Medical Affairs.</li>
-                    <li>Medical Writing y comunicación científica.</li>
-                    <li>Interpretación médica.</li>
-                    <li>Traducción médica y científica.</li>
-                    <li>Educación y desarrollo profesional.</li>
-                    <li>Inteligencia Artificial y tecnología aplicada al conocimiento.</li>
-                </ul>
-                <p class="tw-p" data-text="La interdisciplinariedad de Quimera no significa mezclar disciplinas indiscriminadamente, sino conectarlas conservando el rigor, los métodos y los límites propios de cada una."></p>
-            </div>
-
-            <!-- SECCIÓN 4 -->
-            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-4">Conocimiento, metodología y aplicación.</a></h2>
-            <div id="sec-4" class="typewriter-content">
-                <p class="tw-p" data-text="Quimera entiende que el conocimiento adquiere verdadero potencial cuando existe una relación coherente entre:"></p>
-                <div class="process-flow tw-extra" style="display:none;">QUÉ SABEMOS &darr; CÓMO LO SABEMOS &darr; CÓMO LO COMPRENDEMOS &darr; CÓMO LO APLICAMOS &darr; QUÉ RESULTADOS OBTENEMOS</div>
-                <p class="tw-p" data-text="Por ello, la metodología constituye un componente transversal de su desarrollo. Investigar, analizar, enseñar, interpretar, traducir, comunicar o intervenir son actividades diferentes; sin embargo, todas requieren procesos que permitan fundamentar decisiones y evaluar sus consecuencias."></p>
-            </div>
-
-            <!-- SECCIÓN 5 -->
-            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-5">Del conocimiento a la transferencia.</a></h2>
-            <div id="sec-5" class="typewriter-content">
-                <p class="tw-p" data-text="Una de las funciones centrales de Quimera es la transferencia del conocimiento. Esto significa convertir conocimiento especializado en recursos capaces de llegar a quienes pueden utilizarlo:"></p>
-                <ul class="tw-extra" style="display:none; padding-left: 1.25rem; margin-bottom: 1.25rem;">
-                    <li>Profesionales.</li>
-                    <li>Investigadores.</li>
-                    <li>Docentes.</li>
-                    <li>Estudiantes.</li>
-                    <li>Intérpretes.</li>
-                    <li>Traductores.</li>
-                    <li>Comunicadores.</li>
-                    <li>Organizaciones.</li>
-                    <li>Comunidades relacionadas con la salud.</li>
-                </ul>
-                <p class="tw-p" data-text="Esta transferencia puede materializarse mediante: investigación, cursos, series pedagógicas, guías, publicaciones, infografías, herramientas, metodologías, recursos digitales y servicios profesionales."></p>
-            </div>
-
-            <!-- SECCIÓN 6 -->
-            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-6">C³ Nexus.</a></h2>
-            <div id="sec-6" class="typewriter-content">
-                <p class="tw-p" data-html="true" data-text="Dentro del ecosistema Quimera se desarrolla <strong>C³ Nexus</strong>, concebido como una infraestructura digital para conectar, organizar, desarrollar y transferir conocimiento."></p>
-                <p class="tw-p" data-text="A través de C³ Nexus podrán converger recursos educativos, publicaciones, series pedagógicas, guías, herramientas, bases de conocimiento y otros desarrollos digitales."></p>
-                <p class="tw-p" data-html="true" data-text="Así: <strong>Quimera constituye el ecosistema; C³ Nexus constituye una de sus principales infraestructuras digitales de conexión y transferencia del conocimiento.</strong>"></p>
-            </div>
-
-            <!-- SECCIÓN 7 -->
-            <h2><a href="javascript:void(0);" class="typewriter-toggle" data-target="sec-7">Una estructura en evolución.</a></h2>
-            <div id="sec-7" class="typewriter-content">
-                <p class="tw-p" data-text="Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve."></p>
-                <p class="tw-p" data-text="Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar."></p>
-                <p class="tw-p" data-text="Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable."></p>
-            </div>
-        </article>
-
+        <div class="info-panel">
+            <h2>Exploración Interactiva del Ecosistema</h2>
+            <p>Observe la animación superior en la palabra <strong>QUIMERA</strong>. Una vez que la palabra completa se torne de color blanco, cada letra parpadeará secuencialmente en rojo y blanco. Haga clic en la letra activa para abrir el recuadro central con su respectiva información fundamental.</p>
+        </div>
     </main>
+
+    <!-- Recuadro Central Modal -->
+    <div id="central-modal-overlay">
+        <div id="central-modal">
+            <h3 id="modal-title"></h3>
+            <div id="modal-body"></div>
+            <a href="javascript:void(0);" class="modal-close-btn" id="close-modal-btn">Cerrar<sup>X</sup></a>
+        </div>
+    </div>
 
     <!-- Pie de Página Estandarizado -->
     <footer>
@@ -456,15 +392,183 @@
     </footer>
 
     <script>
+        // Datos correspondientes a cada letra de QUIMERA
+        const sectionsData = [
+            {
+                letterId: 'letter-Q',
+                title: 'Fundamentos del Ecosistema.',
+                content: `
+                    <p>Quimera es un ecosistema científico, académico y profesional dedicado a generar, integrar, desarrollar y transferir conocimiento.</p>
+                    <p>Su propósito nace de una premisa sencilla: <strong>Los problemas complejos requieren algo más que conocimiento especializado. Requieren la capacidad de conectar conocimientos.</strong></p>
+                    <p>Por ello, Quimera reúne diferentes disciplinas, metodologías y campos profesionales relacionados con la ciencia, la salud, la medicina, la comunicación, el lenguaje, la educación y la tecnología, creando un espacio en el que el conocimiento puede ser estudiado, cuestionado, organizado, enseñado y aplicado.</p>
+                `
+            },
+            {
+                letterId: 'letter-U',
+                title: 'Más que información: conocimiento con propósito.',
+                content: `
+                    <p>Quimera não busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable.</p>
+                    <p>Para ello, cada proyecto puede recorrer un proceso continuo:</p>
+                    <div class="process-flow">PREGUNTA &rarr; INVESTIGACIÓN &rarr; ANÁLISIS &rarr; CONOCIMIENTO &rarr; DESARROLLO &rarr; FORMACIÓN &rarr; APLICACIÓN &rarr; EVALUACIÓN</div>
+                    <p>De esta manera, la investigación puede convertirse en formación; la formación, en práctica; y la práctica, nuevamente, en nuevas preguntas que impulsen el conocimiento.</p>
+                `
+            },
+            {
+                letterId: 'letter-I',
+                title: 'Un espacio interdisciplinario.',
+                content: `
+                    <p>Las fronteras entre disciplinas no siempre corresponden a las fronteras de los problemas reales. Por ello, Quimera favorece la interacción entre campos como:</p>
+                    <ul>
+                        <li>Medicina y ciencias de la salud.</li>
+                        <li>Medicina genómica y biotecnología.</li>
+                        <li>Medicina Basada en Evidencia.</li>
+                        <li>Bioestadística y metodología de la investigación.</li>
+                        <li>Medical Affairs.</li>
+                        <li>Medical Writing y comunicación científica.</li>
+                        <li>Interpretación médica.</li>
+                        <li>Traducción médica y científica.</li>
+                        <li>Educación y desarrollo profesional.</li>
+                        <li>Inteligencia Artificial y tecnología aplicada al conocimiento.</li>
+                    </ul>
+                    <p>La interdisciplinariedad de Quimera no significa mezclar disciplinas indiscriminadamente, sino conectarlas conservando el rigor, los métodos y los límites propios de cada una.</p>
+                `
+            },
+            {
+                letterId: 'letter-M',
+                title: 'Conocimiento, metodología y aplicación.',
+                content: `
+                    <p>Quimera entiende que el conocimiento adquiere verdadero potencial cuando existe una relación coherente entre:</p>
+                    <div class="process-flow">QUÉ SABEMOS &darr; CÓMO LO SABEMOS &darr; CÓMO LO COMPRENDEMOS &darr; CÓMO LO APLICAMOS &darr; QUÉ RESULTADOS OBTENEMOS</div>
+                    <p>Por ello, la metodología constituye un componente transversal de su desarrollo. Investigar, analizar, enseñar, interpretar, traducir, comunicar o intervenir son actividades diferentes; sin embargo, todas requieren procesos que permitan fundamentar decisiones y evaluar sus consecuencias.</p>
+                `
+            },
+            {
+                letterId: 'letter-E',
+                title: 'Del conocimiento a la transferencia.',
+                content: `
+                    <p>Una de las funciones centrales de Quimera es la transferencia del conocimiento. Esto significa convertir conocimiento especializado en recursos capaces de llegar a quienes pueden utilizarlo:</p>
+                    <ul>
+                        <li>Profesionales.</li>
+                        <li>Investigadores.</li>
+                        <li>Docentes.</li>
+                        <li>Estudiantes.</li>
+                        <li>Intérpretes.</li>
+                        <li>Traductores.</li>
+                        <li>Comunicadores.</li>
+                        <li>Organizaciones.</li>
+                        <li>Comunidades relacionadas con la salud.</li>
+                    </ul>
+                    <p>Esta transferencia puede materializarse mediante: investigación, cursos, series pedagógicas, guías, publicaciones, infografías, herramientas, metodologías, recursos digitales y servicios profesionales.</p>
+                `
+            },
+            {
+                letterId: 'letter-R',
+                title: 'C³ Nexus.',
+                content: `
+                    <p>Dentro del ecosistema Quimera se desarrolla <strong>C³ Nexus</strong>, concebido como una infraestructura digital para conectar, organizar, desarrollar y transferir conocimiento.</p>
+                    <p>A través de C³ Nexus podrán converger recursos educativos, publicaciones, series pedagógicas, guías, herramientas, bases de conocimiento y otros desarrollos digitales.</p>
+                    <p>Así: <strong>Quimera constituye el ecosistema; C³ Nexus constituye una de sus principales infraestructuras digitales de conexión y transferencia del conocimiento.</strong></p>
+                `
+            },
+            {
+                letterId: 'letter-A',
+                title: 'Una estructura en evolución.',
+                content: `
+                    <p>Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve.</p>
+                    <p>Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar.</p>
+                    <p>Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable.</p>
+                `
+            }
+        ];
+
+        let currentStep = 0;
+        const letterIds = ['letter-Q', 'letter-U', 'letter-I', 'letter-M', 'letter-E', 'letter-R', 'letter-A'];
+
         // 1. Efecto al ingresar a la página (desvanece el overlay inicial)
         window.addEventListener('DOMContentLoaded', () => {
             const overlay = document.getElementById('intro-overlay');
             setTimeout(() => {
                 overlay.classList.add('fade-out');
+                startQuimeraAnimation();
             }, 1000); 
         });
 
-        // 2. Efecto de salida desvanecida al hacer clic en enlaces de navegación
+        // Secuencia de animación de las letras de QUIMERA
+        function startQuimeraAnimation() {
+            // 1. Aparecer cada letra en rojo de forma secuencial
+            letterIds.forEach((id, idx) => {
+                setTimeout(() => {
+                    const el = document.getElementById(id);
+                    el.style.opacity = '1';
+                    el.style.color = '#dc2626';
+                }, idx * 250);
+            });
+
+            // 2. Transformar a blanco letra por letra una vez que aparecen todas
+            const totalAppearTime = letterIds.length * 250 + 400;
+            setTimeout(() => {
+                letterIds.forEach((id, idx) => {
+                    setTimeout(() => {
+                        const el = document.getElementById(id);
+                        el.style.color = '#ffffff';
+                    }, idx * 200);
+                });
+
+                // 3. Iniciar el parpadeo de la primera letra (Q)
+                const totalWhiteTime = letterIds.length * 200 + 300;
+                setTimeout(() => {
+                    activateStep(0);
+                }, totalWhiteTime);
+
+            }, totalAppearTime);
+        }
+
+        function activateStep(index) {
+            if (index >= letterIds.length) return;
+            currentStep = index;
+            const el = document.getElementById(letterIds[index]);
+            el.classList.add('blinking');
+        }
+
+        // Interacción al hacer clic en las letras de QUIMERA
+        letterIds.forEach((id, idx) => {
+            const el = document.getElementById(id);
+            el.addEventListener('click', () => {
+                if (idx !== currentStep) return;
+                if (!el.classList.contains('blinking')) return;
+
+                el.classList.remove('blinking');
+                showModal(sectionsData[idx]);
+            });
+        });
+
+        function showModal(data) {
+            const modalOverlay = document.getElementById('central-modal-overlay');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+
+            modalTitle.textContent = data.title;
+            modalBody.innerHTML = data.content;
+
+            modalOverlay.style.display = 'flex';
+        }
+
+        // Botón "CerrarX" para minimizar el recuadro central y pasar a la siguiente letra
+        document.getElementById('close-modal-btn').addEventListener('click', () => {
+            const modalOverlay = document.getElementById('central-modal-overlay');
+            modalOverlay.style.display = 'none';
+
+            // Cambiar la letra actual de blanco a rojo permanentemente
+            const activeLetterEl = document.getElementById(letterIds[currentStep]);
+            activeLetterEl.style.color = '#dc2626';
+            activeLetterEl.style.animation = 'none';
+
+            // Activar inmediatamente la siguiente letra
+            currentStep++;
+            activateStep(currentStep);
+        });
+
+        // Efecto de salida al hacer clic en otros enlaces
         const allLinks = document.querySelectorAll('a[href]');
         allLinks.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -475,7 +579,6 @@
 
                 e.preventDefault(); 
                 const targetUrl = this.href;
-                
                 document.body.classList.add('blurred-page');
                 
                 setTimeout(() => {
@@ -484,7 +587,7 @@
             });
         });
 
-        // 3. Limpieza de estado de caché al retroceder (bfcache)
+        // Limpieza de estado de caché al retroceder (bfcache)
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
                 document.body.classList.remove('blurred-page');
@@ -493,151 +596,6 @@
                     overlay.classList.add('fade-out');
                 }
             }
-        });
-
-        // 4. Lógica generalizada del Efecto de Máquina de Escribir para cada sección
-        const toggles = document.querySelectorAll('.typewriter-toggle');
-
-        toggles.forEach(trigger => {
-            const targetId = trigger.getAttribute('data-target');
-            const contentBox = document.getElementById(targetId);
-            let isTyped = false;
-            let isTyping = false;
-
-            trigger.addEventListener('click', () => {
-                if (isTyping) return;
-
-                if (!isTyped) {
-                    contentBox.classList.add('active');
-                    isTyping = true;
-
-                    // Recolectar todos los elementos hijos (párrafos, listas UL y otros contenedores)
-                    const children = Array.from(contentBox.children);
-                    let cursor = document.createElement('span');
-                    cursor.className = 'typewriter-cursor';
-
-                    let index = 0;
-
-                    function processNext() {
-                        if (index >= children.length) {
-                            isTyping = false;
-                            isTyped = true;
-                            trigger.textContent += " (Ocultar / Mostrar)";
-                            return;
-                        }
-
-                        let child = children[index];
-
-                        if (child.tagName === 'P') {
-                            let text = child.getAttribute('data-text');
-                            let isHTML = child.getAttribute('data-html') === 'true';
-                            let isLast = (index === children.length - 1);
-                            
-                            let i = 0;
-                            child.innerHTML = "";
-                            child.appendChild(cursor);
-
-                            function typingP() {
-                                if (i < text.length) {
-                                    if (isHTML && text.charAt(i) === '<') {
-                                        let closeIdx = text.indexOf('>', i);
-                                        if (closeIdx !== -1) {
-                                            i = closeIdx + 1;
-                                        }
-                                    }
-
-                                    if (isHTML) {
-                                        child.innerHTML = text.substring(0, i + 1) + cursor.outerHTML;
-                                    } else {
-                                        child.innerHTML = text.substring(0, i + 1);
-                                        child.appendChild(cursor);
-                                    }
-                                    i++;
-                                    setTimeout(typingP, 12);
-                                } else {
-                                    if (isHTML) {
-                                        if (isLast) {
-                                            child.innerHTML = text + cursor.outerHTML;
-                                        } else {
-                                            child.innerHTML = text;
-                                        }
-                                    } else {
-                                        if (!isLast) {
-                                            cursor.remove();
-                                        }
-                                    }
-                                    index++;
-                                    setTimeout(processNext, 150);
-                                }
-                            }
-                            typingP();
-
-                        } else if (child.tagName === 'UL') {
-                            // Mostrar contenedor UL e inmediatamente vaciar y ocultar todos los LIs para evitar que aparezcan fijos
-                            child.style.display = 'block';
-                            const liItems = Array.from(child.children);
-                            
-                            liItems.forEach(li => {
-                                if (!li.dataset.text) {
-                                    li.dataset.text = li.textContent.trim();
-                                }
-                                li.innerHTML = ""; // Vaciar para que no se muestren de golpe
-                            });
-
-                            let liIndex = 0;
-                            let isLastChild = (index === children.length - 1);
-
-                            let processNextLi = function() {
-                                if (liIndex >= liItems.length) {
-                                    index++;
-                                    setTimeout(processNext, 150);
-                                    return;
-                                }
-
-                                let li = liItems[liIndex];
-                                let text = li.dataset.text;
-                                let isLastLi = (isLastChild && liIndex === liItems.length - 1);
-
-                                let i = 0;
-                                li.appendChild(cursor);
-
-                                function typingLi() {
-                                    if (i < text.length) {
-                                        li.innerHTML = text.substring(0, i + 1);
-                                        li.appendChild(cursor);
-                                        i++;
-                                        setTimeout(typingLi, 12);
-                                    } else {
-                                        if (!isLastLi) {
-                                            cursor.remove();
-                                        }
-                                        liIndex++;
-                                        setTimeout(processNextLi, 100);
-                                    }
-                                }
-                                typingLi();
-                            };
-                            processNextLi();
-
-                        } else {
-                            // Elementos extra (DIV con process-flow u otros)
-                            child.style.display = 'block';
-                            index++;
-                            setTimeout(processNext, 200);
-                        }
-                    }
-
-                    processNext();
-
-                } else {
-                    // Alternar visibilidad si ya se generó la animación una vez
-                    if (contentBox.style.display === "none") {
-                        contentBox.style.display = "block";
-                    } else {
-                        contentBox.style.display = "none";
-                    }
-                }
-            });
         });
     </script>
 
