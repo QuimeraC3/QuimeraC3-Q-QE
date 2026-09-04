@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <title>Quimera &bull; Ecosistema Científico, Académico y Profesional</title>
     <style>
         :root {
@@ -26,7 +23,6 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            /* La imagen cubre toda la página por completo */
             background: linear-gradient(rgba(11, 19, 41, 0.85), rgba(11, 19, 41, 0.10)), url('Quimera.png');
             background-size: cover;
             background-position: center center;
@@ -48,7 +44,7 @@
             padding: 1.5rem 2rem;
             z-index: 10;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease;
         }
 
         .top-header.visible {
@@ -69,22 +65,18 @@
             text-decoration: underline;
         }
 
-        /* Capa de desvanecimiento inicial en negro (01 Fondo) */
+        /* Capa de desvanecimiento inicial */
         #intro-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #000000;
+            background: #ffffff;
             z-index: 9999;
             pointer-events: none;
             opacity: 1;
-            transition: opacity 1.5s ease;
-        }
-
-        #intro-overlay.fade-out {
-            opacity: 0;
+            transition: background 0.5s ease, opacity 0.5s ease;
         }
 
         /* Contenedor Principal Centrado */
@@ -96,7 +88,7 @@
             width: 100%;
         }
 
-        /* Título Principal ECOSISTEMA (02) */
+        /* Título Principal ECOSISTEMA */
         .page-title {
             font-family: Georgia, "Times New Roman", serif;
             font-size: 2.2rem;
@@ -115,7 +107,7 @@
             opacity: 1;
         }
 
-        /* Subtítulo QUIMERA con el doble de tamaño y sin espacios (03) */
+        /* Subtítulo QUIMERA */
         .quimera-word-container {
             font-family: Georgia, "Times New Roman", serif;
             font-size: 6rem;
@@ -138,7 +130,7 @@
             transition: color 0.4s ease;
         }
 
-        /* Subtítulo de texto (04) */
+        /* Subtítulo de texto */
         .subtitle-text {
             font-size: 1.1rem;
             line-height: 1.6;
@@ -153,7 +145,7 @@
             opacity: 1;
         }
 
-        /* Recuadro de instrucciones interactivo ubicado arriba del footer (05) */
+        /* Recuadro de instrucciones interactivo */
         .exploration-box {
             max-width: 900px;
             margin: 0 auto 1.5rem auto;
@@ -275,7 +267,6 @@
             color: #5eead4;
         }
 
-        /* Hipervínculo Cerrar */
         .close-link {
             display: inline-block;
             margin-top: 1.5rem;
@@ -290,7 +281,7 @@
             color: #fb7185;
         }
 
-        /* Footer (06) con transparencia del 60% */
+        /* Footer */
         footer {
             text-align: center;
             padding: 1.5rem;
@@ -305,13 +296,13 @@
             opacity: 1;
         }
 
-        /* Texto del footer (07) */
         footer p {
             font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 0.25rem;
             color: #e2e8f0;
             min-height: 1.6em;
+            transition: opacity 0.4s ease;
         }
     </style>
 </head>
@@ -322,29 +313,29 @@
         <a href="https://quimerac3.github.io/" id="header-link"></a>
     </header>
 
-    <!-- 01 La imagen de fondo (a través del desvanecimiento del overlay) -->
+    <!-- Capa de desvanecimiento inicial -->
     <div id="intro-overlay"></div>
 
     <!-- Contenedor Principal Centrado -->
     <main class="main-wrapper">
-        <!-- 02 El título ECOSISTEMA -->
+        <!-- Título ECOSISTEMA -->
         <h1 class="page-title" id="main-title"></h1>
 
-        <!-- 03 El subtítulo QUIMERA (sin espacios entre letras) -->
+        <!-- Subtítulo QUIMERA -->
         <div class="quimera-word-container" id="quimera-word"><span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span></div>
 
-        <!-- 04 El texto del subtítulo -->
+        <!-- Subtítulo de texto -->
         <div class="subtitle-text" id="sub-text"></div>
     </main>
 
-    <!-- 05 El recuadro de las instrucciones de la exploración interactiva (justo encima del footer) -->
+    <!-- Recuadro de instrucciones de la exploración interactiva -->
     <div class="exploration-box" id="exp-box">
         <p id="exp-title"></p>
         <p id="exp-desc"></p>
     </div>
 
-    <!-- 06 El footer y 07 El texto del footer -->
-    <footer>
+    <!-- Footer y texto del footer -->
+    <footer id="main-footer">
         <p id="footer-text-1"></p>
         <p id="footer-text-2"></p>
     </footer>
@@ -359,7 +350,7 @@
     </div>
 
     <script>
-        // Limpieza de caché al retroceder (Back button cache fix)
+        // Limpieza de caché al retroceder (BFCache)
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
                 window.location.reload();
@@ -441,7 +432,7 @@
             {
                 title: "Una estructura en evolución.",
                 content: [
-                    { type: 'p', text: "Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve." },
+                    { type: 'p', text: "Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de las profesionales y las comunidades a las que sirve." },
                     { type: 'p', text: "Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar." },
                     { type: 'p', text: "Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable." }
                 ]
@@ -457,66 +448,21 @@
         const footer2String = "Dr.C. Cesar Cerezo Camacho. Todos los derechos reservados.";
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Inicialmente todo está oculto bajo el overlay negro (#intro-overlay en opacidad 1)
-            // Secuencia de entrada estricta:
+            const overlay = document.getElementById('intro-overlay');
+
+            // 1. Inicialmente blanco (500 ms) y luego pasa a negro (500 ms)
             setTimeout(() => {
-                // 1. Primero: La imagen posterior que abarca toda la página (revelada al desvanecer el overlay)
-                document.getElementById('intro-overlay').classList.add('fade-out');
-
+                overlay.style.background = '#000000';
                 setTimeout(() => {
-                    // 2. Segundo: El header aparece
-                    const topHeader = document.getElementById('top-header');
-                    topHeader.classList.add('visible');
-
+                    overlay.style.opacity = '0'; // Se desvanece a negro
                     setTimeout(() => {
-                        // 3. Tercero: El texto del header con efecto de máquina de escribir, sin cursor al final
-                        typeWriterNoCursor('header-link', headerLinkString, 35, () => {
-                            
-                            // 4. Cuarto: La palabra ECOSISTEMA con efecto de máquina de escribir, sin cursor al final
-                            const mainTitleEl = document.getElementById('main-title');
-                            mainTitleEl.classList.add('visible');
-                            typeWriterNoCursor('main-title', titleString, 40, () => {
-                                
-                                // 5. Quinto: Animación preestablecida de la palabra QUIMERA
-                                const quimeraContainer = document.getElementById('quimera-word');
-                                quimeraContainer.classList.add('visible');
-                                playQuimeraAppearance(() => {
-                                    
-                                    // Subtítulo de texto
-                                    const subEl = document.getElementById('sub-text');
-                                    subEl.classList.add('visible');
-                                    typeWriterNoCursor('sub-text', subTextString, 15, () => {
-                                        
-                                        // 6. Sexto: Recuadro de instrucciones de "Exploración Interactiva", primero el recuadro y después el texto
-                                        const expEl = document.getElementById('exp-box');
-                                        expEl.classList.add('visible');
-                                        typeWriterNoCursor('exp-title', expTitleString, 15, () => {
-                                            typeWriterNoCursor('exp-desc', expDescString, 10, () => {
-                                                
-                                                // 7. Séptimo: Aparecerá el footer
-                                                const footerEl = document.querySelector('footer');
-                                                footerEl.classList.add('visible');
-
-                                                setTimeout(() => {
-                                                    // 8. Octavo: Texto del footer con efecto de máquina de escribir, sin cursor al final
-                                                    typeWriterNoCursor('footer-text-1', footer1String, 10, () => {
-                                                        typeWriterNoCursor('footer-text-2', footer2String, 10, () => {
-                                                            activateCurrentLetter();
-                                                        });
-                                                    });
-                                                }, 300);
-                                            });
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    }, 400);
+                        startSequence();
+                    }, 500);
                 }, 500);
-            }, 300);
+            }, 500);
         });
 
-        // Función de máquina de escribir estándar (con cursor) para modales u otros
+        // Función de máquina de escribir estándar (con cursor)
         function typeWriterSimple(elementId, text, speed, callback) {
             const el = document.getElementById(elementId);
             let i = 0;
@@ -557,13 +503,34 @@
             type();
         }
 
+        function startSequence() {
+            // Segundo: Aparece el header
+            const topHeader = document.getElementById('top-header');
+            topHeader.classList.add('visible');
+
+            // Tercero: El texto del header con máquina de escribir, sin cursor
+            setTimeout(() => {
+                typeWriterNoCursor('header-link', headerLinkString, 35, () => {
+                    // Cuarto: La palabra ECOSISTEMA con máquina de escribir, sin cursor
+                    const mainTitle = document.getElementById('main-title');
+                    mainTitle.classList.add('visible');
+                    typeWriterNoCursor('main-title', titleString, 40, () => {
+                        // Quinto: Animación de la palabra QUIMERA
+                        const quimeraContainer = document.getElementById('quimera-word');
+                        quimeraContainer.classList.add('visible');
+                        playQuimeraAppearance();
+                    });
+                });
+            }, 300);
+        }
+
         const letters = document.querySelectorAll('.quimera-letter');
         let currentLetterIndex = 0;
         let selectedCount = 0;
         let activeBlinkInterval = null;
         let globalBlinkInterval = null;
 
-        function playQuimeraAppearance(onComplete) {
+        function playQuimeraAppearance() {
             let idx = 0;
             function showNextRed() {
                 if (idx < letters.length) {
@@ -574,20 +541,43 @@
                     setTimeout(showWhiteLetters, 300);
                 }
             }
-            function showWhiteLetters() {
-                let idxW = 0;
-                function showNextWhite() {
-                    if (idxW < letters.length) {
-                        letters[idxW].style.color = '#ffffff';
-                        idxW++;
-                        setTimeout(showNextWhite, 200);
-                    } else {
-                        if (onComplete) onComplete();
-                    }
-                }
-                showNextWhite();
-            }
             showNextRed();
+        }
+
+        function showWhiteLetters() {
+            let idx = 0;
+            function showNextWhite() {
+                if (idx < letters.length) {
+                    letters[idx].style.color = '#ffffff';
+                    idx++;
+                    setTimeout(showNextWhite, 200);
+                } else {
+                    // El texto del subtítulo
+                    const subEl = document.getElementById('sub-text');
+                    subEl.classList.add('visible');
+                    typeWriterSimple('sub-text', subTextString, 15, () => {
+                        // Sexto: Recuadro de las instrucciones de la exploración interactiva
+                        const expEl = document.getElementById('exp-box');
+                        expEl.classList.add('visible');
+                        typeWriterSimple('exp-title', expTitleString, 15, () => {
+                            typeWriterSimple('exp-desc', expDescString, 10, () => {
+                                // Séptimo: Aparece el footer
+                                const footerEl = document.getElementById('main-footer');
+                                footerEl.classList.add('visible');
+                                setTimeout(() => {
+                                    // Octavo: El texto del footer con máquina de escribir, sin cursor
+                                    typeWriterNoCursor('footer-text-1', footer1String, 10, () => {
+                                        typeWriterNoCursor('footer-text-2', footer2String, 10, () => {
+                                            activateCurrentLetter();
+                                        });
+                                    });
+                                }, 400);
+                            });
+                        });
+                    });
+                }
+            }
+            showNextWhite();
         }
 
         function activateCurrentLetter() {
@@ -751,61 +741,64 @@
                 isWhite = !isWhite;
             }, 100);
 
-            // 9. Salida de la página en orden exacto (A a I) con desvanecimiento en negro en 2000 ms
+            // Noveno: Salida ordenada de la página al hacer clic en la palabra QUIMERA parpadeante
             wordContainer.onclick = () => {
                 clearInterval(globalBlinkInterval);
 
                 const overlay = document.getElementById('intro-overlay');
-                overlay.style.transition = 'opacity 2s ease';
-                overlay.classList.remove('fade-out');
+                overlay.style.transition = 'opacity 2000ms ease';
+                overlay.style.background = '#000000';
                 overlay.style.opacity = '1';
 
                 // A) Texto del footer
-                setTimeout(() => {
-                    document.getElementById('footer-text-1').style.opacity = '0';
-                    document.getElementById('footer-text-2').style.opacity = '0';
-                }, 150);
+                document.getElementById('footer-text-1').style.opacity = '0';
+                document.getElementById('footer-text-2').style.opacity = '0';
 
                 // B) Footer
                 setTimeout(() => {
-                    document.querySelector('footer').style.opacity = '0';
-                }, 400);
+                    document.getElementById('main-footer').style.opacity = '0';
+                }, 200);
 
                 // C) Texto del recuadro "Exploración Interactiva del Ecosistema"
                 setTimeout(() => {
                     document.getElementById('exp-title').style.opacity = '0';
                     document.getElementById('exp-desc').style.opacity = '0';
-                }, 650);
+                }, 400);
 
                 // D) Recuadro "Exploración Interactiva del Ecosistema"
                 setTimeout(() => {
                     document.getElementById('exp-box').style.opacity = '0';
-                }, 900);
+                }, 600);
 
-                // E) El texto del subtítulo "Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria."
+                // E) El texto del subtítulo
                 setTimeout(() => {
                     document.getElementById('sub-text').style.opacity = '0';
-                }, 1150);
+                }, 800);
 
                 // F) La palabra QUIMERA
                 setTimeout(() => {
                     document.getElementById('quimera-word').style.opacity = '0';
-                }, 1400);
+                }, 1000);
 
                 // G) La palabra ECOSISTEMA
                 setTimeout(() => {
                     document.getElementById('main-title').style.opacity = '0';
-                }, 1650);
+                }, 1200);
 
-                // H) La frase QUIMERA - Inicio General
+                // H) La frase QUIMERA - Inicio General (Header)
                 setTimeout(() => {
                     document.getElementById('top-header').style.opacity = '0';
-                }, 1850);
+                }, 1400);
 
-                // I) La imagen de fondo (cubierta completamente por el desvanecimiento en negro a los 2000 ms) y redirección
+                // I) La imagen de fondo / Desvanecimiento en blanco en 500ms al final
                 setTimeout(() => {
-                    window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
-                }, 2000);
+                    overlay.style.transition = 'background 500ms ease, opacity 500ms ease';
+                    overlay.style.background = '#ffffff';
+                    overlay.style.opacity = '1';
+                    setTimeout(() => {
+                        window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
+                    }, 500);
+                }, 1800);
             };
         }
     </script>
