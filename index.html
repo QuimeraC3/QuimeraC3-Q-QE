@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Quimera &bull; Ecosistema Científico, Académico y Profesional</title>
     <style>
         :root {
@@ -45,7 +48,7 @@
             padding: 1.5rem 2rem;
             z-index: 10;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 0.8s ease;
         }
 
         .top-header.visible {
@@ -104,6 +107,12 @@
             color: #ffffff;
             text-shadow: 0 2px 8px rgba(0,0,0,0.6);
             min-height: 1.6em;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .page-title.visible {
+            opacity: 1;
         }
 
         /* Subtítulo QUIMERA con el doble de tamaño y sin espacios (03) */
@@ -350,6 +359,13 @@
     </div>
 
     <script>
+        // Limpieza de caché al retroceder (Back button cache fix)
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+
         // Textos del sistema y modales
         const modalData = [
             {
@@ -441,23 +457,66 @@
         const footer2String = "Dr.C. Cesar Cerezo Camacho. Todos los derechos reservados.";
 
         window.addEventListener('DOMContentLoaded', () => {
-            // 1. El header superior aparece lentamente
-            const topHeader = document.getElementById('top-header');
-            topHeader.classList.add('visible');
-
-            // 2. El texto del header con efecto de máquina de escribir, sin dejar cursor parpadeando al final
+            // Inicialmente todo está oculto bajo el overlay negro (#intro-overlay en opacidad 1)
+            // Secuencia de entrada estricta:
             setTimeout(() => {
-                typeWriterNoCursor('header-link', headerLinkString, 35, () => {
-                    // 3. Después el resto de la animación comienza con la aparición de la imagen de fondo
+                // 1. Primero: La imagen posterior que abarca toda la página (revelada al desvanecer el overlay)
+                document.getElementById('intro-overlay').classList.add('fade-out');
+
+                setTimeout(() => {
+                    // 2. Segundo: El header aparece
+                    const topHeader = document.getElementById('top-header');
+                    topHeader.classList.add('visible');
+
                     setTimeout(() => {
-                        document.getElementById('intro-overlay').classList.add('fade-out');
-                        startSequence();
-                    }, 500);
-                });
-            }, 600);
+                        // 3. Tercero: El texto del header con efecto de máquina de escribir, sin cursor al final
+                        typeWriterNoCursor('header-link', headerLinkString, 35, () => {
+                            
+                            // 4. Cuarto: La palabra ECOSISTEMA con efecto de máquina de escribir, sin cursor al final
+                            const mainTitleEl = document.getElementById('main-title');
+                            mainTitleEl.classList.add('visible');
+                            typeWriterNoCursor('main-title', titleString, 40, () => {
+                                
+                                // 5. Quinto: Animación preestablecida de la palabra QUIMERA
+                                const quimeraContainer = document.getElementById('quimera-word');
+                                quimeraContainer.classList.add('visible');
+                                playQuimeraAppearance(() => {
+                                    
+                                    // Subtítulo de texto
+                                    const subEl = document.getElementById('sub-text');
+                                    subEl.classList.add('visible');
+                                    typeWriterNoCursor('sub-text', subTextString, 15, () => {
+                                        
+                                        // 6. Sexto: Recuadro de instrucciones de "Exploración Interactiva", primero el recuadro y después el texto
+                                        const expEl = document.getElementById('exp-box');
+                                        expEl.classList.add('visible');
+                                        typeWriterNoCursor('exp-title', expTitleString, 15, () => {
+                                            typeWriterNoCursor('exp-desc', expDescString, 10, () => {
+                                                
+                                                // 7. Séptimo: Aparecerá el footer
+                                                const footerEl = document.querySelector('footer');
+                                                footerEl.classList.add('visible');
+
+                                                setTimeout(() => {
+                                                    // 8. Octavo: Texto del footer con efecto de máquina de escribir, sin cursor al final
+                                                    typeWriterNoCursor('footer-text-1', footer1String, 10, () => {
+                                                        typeWriterNoCursor('footer-text-2', footer2String, 10, () => {
+                                                            activateCurrentLetter();
+                                                        });
+                                                    });
+                                                }, 300);
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    }, 400);
+                }, 500);
+            }, 300);
         });
 
-        // Función de máquina de escribir estándar (con cursor)
+        // Función de máquina de escribir estándar (con cursor) para modales u otros
         function typeWriterSimple(elementId, text, speed, callback) {
             const el = document.getElementById(elementId);
             let i = 0;
@@ -498,23 +557,13 @@
             type();
         }
 
-        function startSequence() {
-            // El título "ECOSISTEMA" en efecto máquina de escribir
-            typeWriterSimple('main-title', titleString, 40, () => {
-                // El subtítulo "QUIMERA" aparece
-                const quimeraContainer = document.getElementById('quimera-word');
-                quimeraContainer.classList.add('visible');
-                playQuimeraAppearance();
-            });
-        }
-
         const letters = document.querySelectorAll('.quimera-letter');
         let currentLetterIndex = 0;
         let selectedCount = 0;
         let activeBlinkInterval = null;
         let globalBlinkInterval = null;
 
-        function playQuimeraAppearance() {
+        function playQuimeraAppearance(onComplete) {
             let idx = 0;
             function showNextRed() {
                 if (idx < letters.length) {
@@ -525,43 +574,20 @@
                     setTimeout(showWhiteLetters, 300);
                 }
             }
-            showNextRed();
-        }
-
-        function showWhiteLetters() {
-            let idx = 0;
-            function showNextWhite() {
-                if (idx < letters.length) {
-                    letters[idx].style.color = '#ffffff';
-                    idx++;
-                    setTimeout(showNextWhite, 200);
-                } else {
-                    // El texto del subtítulo
-                    const subEl = document.getElementById('sub-text');
-                    subEl.classList.add('visible');
-                    typeWriterSimple('sub-text', subTextString, 15, () => {
-                        // El recuadro de las instrucciones de la exploración
-                        const expEl = document.getElementById('exp-box');
-                        expEl.classList.add('visible');
-                        typeWriterSimple('exp-title', expTitleString, 15, () => {
-                            typeWriterSimple('exp-desc', expDescString, 10, () => {
-                                // El footer aparece
-                                const footerEl = document.querySelector('footer');
-                                footerEl.classList.add('visible');
-                                setTimeout(() => {
-                                    // El texto del footer se escribe
-                                    typeWriterSimple('footer-text-1', footer1String, 10, () => {
-                                        typeWriterSimple('footer-text-2', footer2String, 10, () => {
-                                            activateCurrentLetter();
-                                        });
-                                    });
-                                }, 400);
-                            });
-                        });
-                    });
+            function showWhiteLetters() {
+                let idxW = 0;
+                function showNextWhite() {
+                    if (idxW < letters.length) {
+                        letters[idxW].style.color = '#ffffff';
+                        idxW++;
+                        setTimeout(showNextWhite, 200);
+                    } else {
+                        if (onComplete) onComplete();
+                    }
                 }
+                showNextWhite();
             }
-            showNextWhite();
+            showNextRed();
         }
 
         function activateCurrentLetter() {
@@ -725,14 +751,61 @@
                 isWhite = !isWhite;
             }, 100);
 
+            // 9. Salida de la página en orden exacto (A a I) con desvanecimiento en negro en 2000 ms
             wordContainer.onclick = () => {
                 clearInterval(globalBlinkInterval);
-                document.getElementById('intro-overlay').classList.remove('fade-out');
-                document.getElementById('intro-overlaystyle').background = '#ffffff';
-                document.getElementById('intro-overlay').style.opacity = '1';
+
+                const overlay = document.getElementById('intro-overlay');
+                overlay.style.transition = 'opacity 2s ease';
+                overlay.classList.remove('fade-out');
+                overlay.style.opacity = '1';
+
+                // A) Texto del footer
+                setTimeout(() => {
+                    document.getElementById('footer-text-1').style.opacity = '0';
+                    document.getElementById('footer-text-2').style.opacity = '0';
+                }, 150);
+
+                // B) Footer
+                setTimeout(() => {
+                    document.querySelector('footer').style.opacity = '0';
+                }, 400);
+
+                // C) Texto del recuadro "Exploración Interactiva del Ecosistema"
+                setTimeout(() => {
+                    document.getElementById('exp-title').style.opacity = '0';
+                    document.getElementById('exp-desc').style.opacity = '0';
+                }, 650);
+
+                // D) Recuadro "Exploración Interactiva del Ecosistema"
+                setTimeout(() => {
+                    document.getElementById('exp-box').style.opacity = '0';
+                }, 900);
+
+                // E) El texto del subtítulo "Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria."
+                setTimeout(() => {
+                    document.getElementById('sub-text').style.opacity = '0';
+                }, 1150);
+
+                // F) La palabra QUIMERA
+                setTimeout(() => {
+                    document.getElementById('quimera-word').style.opacity = '0';
+                }, 1400);
+
+                // G) La palabra ECOSISTEMA
+                setTimeout(() => {
+                    document.getElementById('main-title').style.opacity = '0';
+                }, 1650);
+
+                // H) La frase QUIMERA - Inicio General
+                setTimeout(() => {
+                    document.getElementById('top-header').style.opacity = '0';
+                }, 1850);
+
+                // I) La imagen de fondo (cubierta completamente por el desvanecimiento en negro a los 2000 ms) y redirección
                 setTimeout(() => {
                     window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
-                }, 800);
+                }, 2000);
             };
         }
     </script>
