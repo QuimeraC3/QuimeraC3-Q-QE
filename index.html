@@ -44,7 +44,7 @@
             padding: 1.5rem 2rem;
             z-index: 10;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 0.8s ease;
         }
 
         .top-header.visible {
@@ -72,11 +72,11 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #ffffff;
+            background: #000000;
             z-index: 9999;
             pointer-events: none;
             opacity: 1;
-            transition: opacity 1.5s ease;
+            transition: opacity 1s ease;
         }
 
         #intro-overlay.fade-out {
@@ -130,7 +130,7 @@
 
         .quimera-letter {
             display: inline-block;
-            color: transparent;
+            color: #ffffff;
             transition: color 0.4s ease;
         }
 
@@ -316,7 +316,7 @@
 
     <!-- Header con hipervínculo en la parte superior izquierda -->
     <header class="top-header" id="top-header">
-        <a href="https://quimerac3.github.io/" id="header-link"></a>
+        <a href="https://quimerac3.github.io/" id="header-link">QUIMERA - Inicio General</a>
     </header>
 
     <!-- Capa de desvanecimiento inicial -->
@@ -324,23 +324,23 @@
 
     <!-- Contenedor Principal Centrado -->
     <main class="main-wrapper">
-        <h1 class="page-title" id="main-title"></h1>
+        <h1 class="page-title" id="main-title">ECOSISTEMA</h1>
 
         <div class="quimera-word-container" id="quimera-word">
             <span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span>
         </div>
 
-        <div class="subtitle-text" id="sub-text"></div>
+        <div class="subtitle-text" id="sub-text">Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.</div>
     </main>
 
     <div class="exploration-box" id="exp-box">
-        <p id="exp-title"></p>
-        <p id="exp-desc"></p>
+        <p id="exp-title">EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA.</p>
+        <p id="exp-desc">Observe la animación superior en la palabra QUIMERA. Una vez que la palabra completa se torne de color blanco, cada letra parpadeará secuencialmente en rojo y blanco. Haga clic en la letra activa para abrir el recuadro central con su respectiva información fundamental.</p>
     </div>
 
     <footer>
-        <p id="footer-text-1"></p>
-        <p id="footer-text-2"></p>
+        <p id="footer-text-1">&copy; 2026 Instituto Quimera &bull; Centro de Investigación, Docencia, Servicio y Difusión.</p>
+        <p id="footer-text-2">Dr.C. Cesar Cerezo Camacho. Todos los derechos reservados.</p>
     </footer>
 
     <!-- Recuadro Central (Modal) -->
@@ -360,7 +360,7 @@
             }
         });
 
-        // Textos del sistema y modales (Títulos en Mayúscula)
+        // Textos y modales
         const modalData = [
             {
                 title: "FUNDAMENTOS DEL ECOSISTEMA.",
@@ -442,53 +442,35 @@
             }
         ];
 
-        const headerLinkString = "QUIMERA - Inicio General";
-        const titleString = "ECOSISTEMA";
-        const subTextString = "Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.";
-        const expTitleString = "EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA.";
-        const expDescString = "Observe la animación superior en la palabra QUIMERA. Una vez que la palabra completa se torne de color blanco, cada letra parpadeará secuencialmente en rojo y blanco. Haga clic en la letra activa para abrir el recuadro central con su respectiva información fundamental.";
-        const footer1String = "© 2026 Instituto Quimera • Centro de Investigación, Docencia, Servicio y Difusión.";
-        const footer2String = "Dr.C. Cesar Cerezo Camacho. Todos los derechos reservados.";
-
         window.addEventListener('DOMContentLoaded', () => {
             const overlay = document.getElementById('intro-overlay');
-            overlay.style.background = '#ffffff';
-            overlay.style.opacity = '1';
 
-            // Secuencia inicial: blanco (500ms), luego negro (500ms) sin nada visible
+            // Quitar la pantalla de carga negra de forma segura tras 400ms
             setTimeout(() => {
-                overlay.style.background = '#000000';
-                setTimeout(() => {
-                    overlay.classList.add('fade-out');
+                overlay.classList.add('fade-out');
+                
+                // Hacer visibles los elementos progresivamente de forma segura
+                document.getElementById('top-header').classList.add('visible');
+                document.getElementById('main-title').classList.add('visible');
+                
+                const quimeraContainer = document.getElementById('quimera-word');
+                quimeraContainer.classList.add('visible');
+                playQuimeraAppearance();
 
-                    // Secuencia de aparición en orden estricto:
-                    // Primero: Imagen de fondo (revelada al quitar el overlay)
-                    // Segundo: El header
-                    const topHeader = document.getElementById('top-header');
-                    topHeader.classList.add('visible');
+                document.getElementById('sub-text').classList.add('visible');
+                document.getElementById('exp-box').classList.add('visible');
+                document.getElementById('exp-title').classList.add('visible');
+                document.getElementById('exp-desc').classList.add('visible');
 
-                    // Tercero: Texto del header (máquina de escribir sin cursor)
-                    setTimeout(() => {
-                        typeWriterNoCursor('header-link', headerLinkString, 35, () => {
-                            // Cuarto: La palabra ECOSISTEMA (máquina de escribir sin cursor)
-                            const titleEl = document.getElementById('main-title');
-                            titleEl.classList.add('visible');
-                            typeWriterNoCursor('main-title', titleString, 40, () => {
-                                // Quinto: Animación preestablecida de QUIMERA
-                                const quimeraContainer = document.getElementById('quimera-word');
-                                quimeraContainer.classList.add('visible');
-                                playQuimeraAppearance();
-                            });
-                        });
-                    }, 400);
+                const footerEl = document.querySelector('footer');
+                footerEl.classList.add('visible');
+                document.getElementById('footer-text-1').classList.add('visible');
+                document.getElementById('footer-text-2').classList.add('visible');
+            }, 600);
 
-                }, 500);
-            }, 500);
-
-            // Manejo del hipervínculo del header (desvanecimiento en blanco en 500ms)
+            // Manejo del hipervínculo del header
             document.getElementById('header-link').addEventListener('click', (e) => {
                 e.preventDefault();
-                overlay.style.background = '#ffffff';
                 overlay.style.opacity = '1';
                 overlay.classList.remove('fade-out');
                 setTimeout(() => {
@@ -496,24 +478,6 @@
                 }, 500);
             });
         });
-
-        // Función de máquina de escribir sin cursor al finalizar
-        function typeWriterNoCursor(elementId, text, speed, callback) {
-            const el = document.getElementById(elementId);
-            let i = 0;
-            el.innerHTML = "";
-
-            function type() {
-                if (i < text.length) {
-                    el.innerHTML = text.substring(0, i + 1);
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    if (callback) callback();
-                }
-            }
-            type();
-        }
 
         const letters = document.querySelectorAll('.quimera-letter');
         let currentLetterIndex = 0;
@@ -527,9 +491,9 @@
                 if (idx < letters.length) {
                     letters[idx].style.color = '#dc2626';
                     idx++;
-                    setTimeout(showNextRed, 250);
+                    setTimeout(showNextRed, 200);
                 } else {
-                    setTimeout(showWhiteLetters, 300);
+                    setTimeout(showWhiteLetters, 250);
                 }
             }
             showNextRed();
@@ -541,41 +505,9 @@
                 if (idx < letters.length) {
                     letters[idx].style.color = '#ffffff';
                     idx++;
-                    setTimeout(showNextWhite, 200);
+                    setTimeout(showNextWhite, 150);
                 } else {
-                    // El texto del subtítulo
-                    const subEl = document.getElementById('sub-text');
-                    subEl.classList.add('visible');
-                    typeWriterNoCursor('sub-text', subTextString, 15, () => {
-                        // Sexto: Aparecerá el recuadro de las instrucciones de Exploración Interactiva (recuadro primero, luego texto sin cursor)
-                        const expEl = document.getElementById('exp-box');
-                        expEl.classList.add('visible');
-                        setTimeout(() => {
-                            const expTitleEl = document.getElementById('exp-title');
-                            expTitleEl.classList.add('visible');
-                            typeWriterNoCursor('exp-title', expTitleString, 15, () => {
-                                const expDescEl = document.getElementById('exp-desc');
-                                expDescEl.classList.add('visible');
-                                typeWriterNoCursor('exp-desc', expDescString, 10, () => {
-                                    // Séptimo: Aparecerá el footer
-                                    const footerEl = document.querySelector('footer');
-                                    footerEl.classList.add('visible');
-                                    setTimeout(() => {
-                                        // Octavo: Aparecerá el texto del footer con máquina de escribir sin cursor
-                                        const f1 = document.getElementById('footer-text-1');
-                                        const f2 = document.getElementById('footer-text-2');
-                                        f1.classList.add('visible');
-                                        typeWriterNoCursor('footer-text-1', footer1String, 10, () => {
-                                            f2.classList.add('visible');
-                                            typeWriterNoCursor('footer-text-2', footer2String, 10, () => {
-                                                activateCurrentLetter();
-                                            });
-                                        });
-                                    }, 300);
-                                });
-                            });
-                        }, 300);
-                    });
+                    activateCurrentLetter();
                 }
             }
             showNextWhite();
@@ -625,70 +557,28 @@
             backdrop.classList.add('active');
 
             const data = modalData[index];
-            let tIdx = 0;
-            function typeModalTitle() {
-                if (tIdx < data.title.length) {
-                    modalTitle.innerHTML = data.title.substring(0, tIdx + 1);
-                    tIdx++;
-                    setTimeout(typeModalTitle, 20);
-                } else {
-                    typeModalBodyContent(0);
-                }
-            }
-            setTimeout(typeModalTitle, 300);
+            modalTitle.innerHTML = data.title;
 
-            function typeModalBodyContent(contentIndex) {
-                if (contentIndex >= data.content.length) return;
-
-                let item = data.content[contentIndex];
+            data.content.forEach(item => {
                 if (item.type === 'p') {
                     let pElem = document.createElement('p');
+                    pElem.textContent = item.text;
                     modalBody.appendChild(pElem);
-                    let pIdx = 0;
-                    function typeP() {
-                        if (pIdx < item.text.length) {
-                            pElem.innerHTML = item.text.substring(0, pIdx + 1);
-                            pIdx++;
-                            setTimeout(typeP, 12);
-                        } else {
-                            setTimeout(() => typeModalBodyContent(contentIndex + 1), 150);
-                        }
-                    }
-                    typeP();
                 } else if (item.type === 'flow') {
                     let flowElem = document.createElement('div');
                     flowElem.className = 'process-flow';
                     flowElem.textContent = item.text;
                     modalBody.appendChild(flowElem);
-                    setTimeout(() => typeModalBodyContent(contentIndex + 1), 200);
                 } else if (item.type === 'ul') {
                     let ulElem = document.createElement('ul');
+                    item.items.forEach(liText => {
+                        let liElem = document.createElement('li');
+                        liElem.textContent = liText;
+                        ulElem.appendChild(liElem);
+                    });
                     modalBody.appendChild(ulElem);
-                    let liIdx = 0;
-                    function typeLi() {
-                        if (liIdx < item.items.length) {
-                            let liElem = document.createElement('li');
-                            let liText = item.items[liIdx];
-                            ulElem.appendChild(liElem);
-                            let lCharIdx = 0;
-                            function typeLChar() {
-                                if (lCharIdx < liText.length) {
-                                    liElem.innerHTML = liText.substring(0, lCharIdx + 1);
-                                    lCharIdx++;
-                                    setTimeout(typeLChar, 10);
-                                } else {
-                                    liIdx++;
-                                    setTimeout(typeLi, 100);
-                                }
-                            }
-                            typeLChar();
-                        } else {
-                            setTimeout(() => typeModalBodyContent(contentIndex + 1), 150);
-                        }
-                    }
-                    typeLi();
                 }
-            }
+            });
 
             closeBtn.onclick = () => {
                 backdrop.classList.remove('active');
@@ -702,11 +592,10 @@
                     } else {
                         enableFinalHyperlink();
                     }
-                }, 800);
+                }, 400);
             };
         }
 
-        // Noveno punto: Animación secuencial Q->U->I->M->E->R->A (blanco a rojo en 500ms, luego rojo a blanco en 500ms)
         function enableFinalHyperlink() {
             const wordContainer = document.getElementById('quimera-word');
             wordContainer.style.cursor = 'pointer';
@@ -714,7 +603,6 @@
             const stepTime = 500 / letters.length;
 
             function runSequence() {
-                // Transición blanco a rojo: Q -> U -> I -> M -> E -> R -> A
                 let i = 0;
                 function turnRed(callback) {
                     if (i < letters.length) {
@@ -726,7 +614,6 @@
                     }
                 }
 
-                // Transición rojo a blanco: Q -> U -> I -> M -> E -> R -> A
                 let j = 0;
                 function turnWhite(callback) {
                     if (j < letters.length) {
@@ -749,31 +636,16 @@
 
             runSequence();
 
-            // Salida de la página al seleccionar el hipervínculo de QUIMERA
             wordContainer.onclick = () => {
                 clearTimeout(globalColorInterval);
                 const overlay = document.getElementById('intro-overlay');
-                overlay.style.background = '#000000';
+                overlay.style.background = '#ffffff';
                 overlay.style.opacity = '1';
                 overlay.classList.remove('fade-out');
 
-                // Orden estricto de desvanecimiento (A hasta I):
-                setTimeout(() => { document.getElementById('footer-text-1').style.opacity = '0'; document.getElementById('footer-text-2').style.opacity = '0'; }, 200); // A) Texto del footer
-                setTimeout(() => { document.querySelector('footer').style.opacity = '0'; }, 400); // B) Footer
-                setTimeout(() => { document.getElementById('exp-desc').style.opacity = '0'; document.getElementById('exp-title').style.opacity = '0'; }, 600); // C) Texto del recuadro
-                setTimeout(() => { document.getElementById('exp-box').style.opacity = '0'; }, 800); // D) Recuadro Exploración
-                setTimeout(() => { document.getElementById('sub-text').style.opacity = '0'; }, 1000); // E) Texto del subtítulo
-                setTimeout(() => { document.getElementById('quimera-word').style.opacity = '0'; }, 1200); // F) Palabra QUIMERA
-                setTimeout(() => { document.getElementById('main-title').style.opacity = '0'; }, 1400); // G) Palabra ECOSISTEMA
-                setTimeout(() => { document.getElementById('top-header').style.opacity = '0'; }, 1600); // H) Frase QUIMERA - Inicio General
                 setTimeout(() => {
-                    // I) La imagen de fondo con transición en blanco de 500 milisegundos
-                    overlay.style.background = '#ffffff';
-                    overlay.style.opacity = '1';
-                    setTimeout(() => {
-                        window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
-                    }, 500);
-                }, 2000);
+                    window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
+                }, 500);
             };
         }
     </script>
