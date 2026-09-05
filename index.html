@@ -65,14 +65,14 @@
             text-decoration: underline;
         }
 
-        /* Capa de desvanecimiento inicial */
+        /* Capa de desvanecimiento inicial en blanco */
         #intro-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #000000;
+            background: #ffffff;
             z-index: 9999;
             pointer-events: none;
             opacity: 1;
@@ -319,7 +319,7 @@
         <a href="https://quimerac3.github.io/" id="header-link">QUIMERA - Inicio General</a>
     </header>
 
-    <!-- Capa de desvanecimiento inicial -->
+    <!-- Capa de desvanecimiento inicial en blanco -->
     <div id="intro-overlay"></div>
 
     <!-- Contenedor Principal Centrado -->
@@ -445,11 +445,11 @@
         window.addEventListener('DOMContentLoaded', () => {
             const overlay = document.getElementById('intro-overlay');
 
-            // Quitar la pantalla de carga negra de forma segura tras 400ms
+            // Desvanecer el overlay blanco tras 400ms
             setTimeout(() => {
                 overlay.classList.add('fade-out');
                 
-                // Hacer visibles los elementos progresivamente de forma segura
+                // Hacer visibles los elementos progresivamente
                 document.getElementById('top-header').classList.add('visible');
                 document.getElementById('main-title').classList.add('visible');
                 
@@ -471,6 +471,7 @@
             // Manejo del hipervínculo del header
             document.getElementById('header-link').addEventListener('click', (e) => {
                 e.preventDefault();
+                overlay.style.background = '#ffffff';
                 overlay.style.opacity = '1';
                 overlay.classList.remove('fade-out');
                 setTimeout(() => {
