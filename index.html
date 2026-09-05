@@ -92,15 +92,16 @@
             width: 100%;
         }
 
-        /* Título Principal ECOSISTEMA */
+        /* Título Principal ECOSISTEMA (Dorado cobre y ascendido 100% de su letra) */
         .page-title {
             font-family: Georgia, "Times New Roman", serif;
             font-size: 2.2rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             margin-bottom: 1.5rem;
+            margin-top: -2.2rem;
             text-transform: uppercase;
-            color: #ffffff;
+            color: #c88b32;
             text-shadow: 0 2px 8px rgba(0,0,0,0.6);
             min-height: 1.6em;
             opacity: 0;
@@ -111,12 +112,13 @@
             opacity: 1;
         }
 
-        /* Subtítulo QUIMERA */
+        /* Subtítulo QUIMERA (Descendido 100% de su letra) */
         .quimera-word-container {
             font-family: Georgia, "Times New Roman", serif;
             font-size: 6rem;
             font-weight: 700;
             letter-spacing: 0.25em;
+            margin-top: 6rem;
             margin-bottom: 1.5rem;
             display: inline-block;
             cursor: default;
@@ -134,24 +136,27 @@
             transition: color 0.4s ease;
         }
 
-        /* Subtítulo de texto */
+        /* Subtítulo de texto (Descendido justo por encima del recuadro) */
         .subtitle-text {
             font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem auto;
+            max-width: 1150px;
             color: #e2e8f0;
             min-height: 1.6em;
             opacity: 0;
             transition: opacity 0.8s ease;
+            width: calc(100% - 3rem);
+            text-align: center;
         }
 
         .subtitle-text.visible {
             opacity: 1;
         }
 
-        /* Recuadro de instrucciones interactivo */
+        /* Recuadro de instrucciones interactivo (Mayor longitud horizontal) */
         .exploration-box {
-            max-width: 900px;
+            max-width: 1150px;
             margin: 0 auto 1.5rem auto;
             padding: 1.25rem 1.5rem;
             background: rgba(255, 255, 255, 0.05);
@@ -322,16 +327,17 @@
     <!-- Capa de desvanecimiento inicial en blanco -->
     <div id="intro-overlay"></div>
 
-    <!-- Contenedor Principal Centrado -->
+    <!-- Contenedor Principal Centrado (Solo Título y Quimera) -->
     <main class="main-wrapper">
         <h1 class="page-title" id="main-title">ECOSISTEMA</h1>
 
         <div class="quimera-word-container" id="quimera-word">
             <span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span>
         </div>
-
-        <div class="subtitle-text" id="sub-text">Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.</div>
     </main>
+
+    <!-- Subtítulo de texto posicionado justo encima del recuadro interactivo -->
+    <div class="subtitle-text" id="sub-text">Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.</div>
 
     <div class="exploration-box" id="exp-box">
         <p id="exp-title">EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA.</p>
