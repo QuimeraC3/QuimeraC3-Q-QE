@@ -379,7 +379,7 @@
             {
                 title: "MÁS QUE INFORMACIÓN: CONOCIMIENTO CON PROPÓSITO.",
                 content: [
-                    { type: 'p', text: "Quimera no busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable." },
+                    { type: 'p', text: "Quimera não busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable." },
                     { type: 'p', text: "Para ello, cada proyecto puede recorrer un proceso continuo:" },
                     { type: 'flow', text: "PREGUNTA → INVESTIGACIÓN → ANÁLISIS → CONOCIMIENTO → DESARROLLO → FORMACIÓN → APLICACIÓN → EVALUACIÓN" },
                     { type: 'p', text: "De esta manera, la investigación puede convertirse en formación; la formación, en práctica; y la práctica, nuevamente, en nuevas preguntas que impulsen el conocimiento." }
@@ -473,7 +473,9 @@
                 
                 const footerP = document.querySelector('footer p');
                 if (footerP) {
-                    footerP.textContent = footerP.dataset.text;
+                    // Autocorrección dinámica del año actual con un toque malévolo ;)
+                    const currentYear = new Date().getFullYear();
+                    footerP.textContent = footerP.dataset.text.replace('2026', currentYear);
                     footerP.classList.add('visible');
                 }
             }, 600);
