@@ -469,8 +469,13 @@
 
                 const footerEl = document.querySelector('footer');
                 footerEl.classList.add('visible');
-                document.getElementById('footer-text-1').classList.add('visible');
-                document.getElementById('footer-text-2').classList.add('visible');
+                
+                // Corrección aplicada aquí para el footer
+                const footerP = document.querySelector('footer p');
+                if (footerP) {
+                    footerP.textContent = footerP.dataset.text;
+                    footerP.classList.add('visible');
+                }
             }, 600);
 
             // Manejo del hipervínculo del header
