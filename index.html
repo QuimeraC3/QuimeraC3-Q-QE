@@ -97,7 +97,11 @@
             font-weight: 700;
             text-decoration: none;
             opacity: 0;
-            transition: color 0.2s ease, opacity 0.8s ease;
+            transition: color 0.2s ease, opacity 0.8s ease, background-color 0.3s ease;
+            background: rgba(15, 118, 110, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
         }
 
         .top-header-right a.visible {
@@ -105,8 +109,9 @@
         }
 
         .top-header-right a:hover {
-            color: #38bdf8;
-            text-decoration: underline;
+            background: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
         }
 
         /* Capa de desvanecimiento inicial en blanco */
@@ -337,6 +342,9 @@
 </head>
 <body>
 
+    <!-- Elemento de Audio -->
+    <audio id="bg-music" src="Tango_Futuro_(Lado_B).mp3" loop preload="auto"></audio>
+
     <!-- Capa de fondo animada -->
     <div class="bg-image" id="bg-image"></div>
 
@@ -347,8 +355,8 @@
 
     <!-- Header Derecho -->
     <div class="top-header-right">
-        <a href="#" id="music-link">Música</a>
-        <a href="#" id="fullscreen-link">Pantalla Completa</a>
+        <a href="#" id="music-link">🎵 Música: OFF</a>
+        <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
     </div>
 
     <!-- Capa de desvanecimiento inicial en blanco -->
@@ -389,20 +397,51 @@
             }
         });
 
-        // Configuración de pantalla completa y música
-        document.getElementById('fullscreen-link').addEventListener('click', (e) => {
+        // Control de Reproducción de Música
+        const music = document.getElementById('bg-music');
+        const musicLink = document.getElementById('music-link');
+        let isMusicPlaying = false;
+
+        musicLink.addEventListener('click', (e) => {
             e.preventDefault();
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => console.log(err));
+            if (isMusicPlaying) {
+                music.pause();
+                musicLink.textContent = '🎵 Música: OFF';
+                isMusicPlaying = false;
             } else {
-                document.exitFullscreen();
+                music.play().then(() => {
+                    musicLink.textContent = '🎶 Música: ON';
+                    isMusicPlaying = true;
+                }).catch(error => {
+                    console.log("Error al reproducir audio:", error);
+                });
             }
         });
 
-        document.getElementById('music-link').addEventListener('click', (e) => {
+        // Control de Pantalla Completa
+        const fullscreenLink = document.getElementById('fullscreen-link');
+
+        fullscreenLink.addEventListener('click', (e) => {
             e.preventDefault();
-            // Espacio listo para la lógica de reproducción de música
-            console.log("Alternar música");
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    fullscreenLink.textContent = '❌ Salir Pantalla Completa';
+                }).catch(err => {
+                    console.log("Error al intentar entrar en pantalla completa:", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    fullscreenLink.textContent = '⛶ Pantalla Completa';
+                });
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenLink.textContent = '⛶ Pantalla Completa';
+            } else {
+                fullscreenLink.textContent = '❌ Salir Pantalla Completa';
+            }
         });
 
         const modalData = [
@@ -417,7 +456,7 @@
             {
                 title: "MÁS QUE INFORMACIÓN: CONOCIMIENTO CON PROPÓSITO.",
                 content: [
-                    { type: 'p', text: "Quimera não busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable." },
+                    { type: 'p', text: "Quimera no busca simplemente acumular información. Busca transformar la información en conocimiento comprensible, fundamentado y aplicable." },
                     { type: 'p', text: "Para ello, cada proyecto puede recorrer un proceso continuo:" },
                     { type: 'flow', text: "PREGUNTA → INVESTIGACIÓN → ANÁLISIS → CONOCIMIENTO → DESARROLLO → FORMACIÓN → APLICACIÓN → EVALUACIÓN" },
                     { type: 'p', text: "De esta manera, la investigación puede convertirse en formación; la formación, en práctica; y la práctica, nuevamente, en nuevas preguntas que impulsen el conocimiento." }
@@ -479,7 +518,7 @@
             {
                 title: "UNA ESTRUCTURA EN EVOLUCIÓN.",
                 content: [
-                    { type: 'p', text: "Quimera não pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve." },
+                    { type: 'p', text: "Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve." },
                     { type: 'p', text: "Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar." },
                     { type: 'p', text: "Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable." }
                 ]
