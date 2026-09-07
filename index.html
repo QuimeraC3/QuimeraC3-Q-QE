@@ -61,12 +61,6 @@
             left: 0;
             padding: 1.5rem 2rem;
             z-index: 10;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        .top-header.visible {
-            opacity: 1;
         }
 
         .top-header a {
@@ -77,6 +71,7 @@
             text-decoration: none;
             letter-spacing: -0.01em;
             transition: color 0.2s ease;
+            opacity: 0; /* Oculto inicialmente para el efecto de máquina de escribir */
         }
 
         .top-header a:hover {
@@ -347,7 +342,7 @@
 
     <!-- Header Izquierdo -->
     <header class="top-header" id="top-header">
-        <a href="https://quimerac3.github.io/" id="header-link">QUIMERA - Inicio General</a>
+        <a href="https://quimerac3.github.io/" id="header-link"></a>
     </header>
 
     <!-- Header Derecho -->
@@ -522,8 +517,8 @@
             document.getElementById('bg-image').classList.add('visible');
             await new Promise(r => setTimeout(r, 1000));
 
-            // 03. Aparición texto: QUIMERA - Inicio General
-            document.getElementById('top-header').classList.add('visible');
+            // 03. Aparición texto: QUIMERA - Inicio General (Máquina de escribir)
+            await typeWriter('header-link', 'QUIMERA - Inicio General', 40);
             await new Promise(r => setTimeout(r, 400));
 
             // 04. Aparición texto: Música
