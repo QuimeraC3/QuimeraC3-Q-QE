@@ -287,15 +287,19 @@
             color: #fb7185;
         }
 
-        /* Footer */
+        /* Footer con especificaciones actualizadas */
         footer {
             text-align: center;
-            padding: 0.5rem;
-            background: rgba(11, 19, 41, 0.4);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 2rem;
+            background-color: rgba(11, 19, 41, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #ffffff;
             font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 500ms ease;
         }
 
         footer.visible {
@@ -303,13 +307,9 @@
         }
 
         footer p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 0.25rem;
-            color: #e2e8f0;
-            min-height: 1.6em;
+            color: #ffffff;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 500ms ease;
         }
 
         footer p.visible {
@@ -440,7 +440,7 @@
             {
                 title: "UNA ESTRUCTURA EN EVOLUCIÓN.",
                 content: [
-                    { type: 'p', text: "Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve." },
+                    { type: 'p', text: "Quimera não pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve." },
                     { type: 'p', text: "Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar." },
                     { type: 'p', text: "Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable." }
                 ]
@@ -470,7 +470,6 @@
                 const footerEl = document.querySelector('footer');
                 footerEl.classList.add('visible');
                 
-                // Corrección aplicada aquí para el footer
                 const footerP = document.querySelector('footer p');
                 if (footerP) {
                     footerP.textContent = footerP.dataset.text;
