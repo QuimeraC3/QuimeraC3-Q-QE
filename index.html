@@ -633,9 +633,8 @@
             await typeWriter('main-title', 'ECOSISTEMA', 80);
             await new Promise(r => setTimeout(r, 400));
 
-            // Modificación 1: Desvanecimiento de entrada de QUIMERA y posterior animación preestablecida
             document.getElementById('quimera-word').classList.add('visible');
-            await new Promise(r => setTimeout(r, 800)); // Espera a que concluya el desvanecimiento (0.8s)
+            await new Promise(r => setTimeout(r, 800));
             await playQuimeraAppearanceAsync();
             await new Promise(r => setTimeout(r, 400));
 
@@ -645,7 +644,6 @@
             document.getElementById('exp-box').classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
-            // Modificación 3: Texto con mayúsculas y minúsculas exactas
             await typeWriter('exp-title', 'EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA: Una vez que la palabra QUIMERA cambie de color a blanco, selecccione la letra parpadeante para descubrir: ¿Qué es QUIMERA?', 25);
             await new Promise(r => setTimeout(r, 400));
 
@@ -734,7 +732,7 @@
                 targetLetter.style.color = isWhite ? '#ffffff' : '#dc2626';
                 isWhite = !isWhite;
                 blinks++;
-                if (blinks >= 10) { // 10 cambios (5 ciclos completos de encendido/apagado) en 1000ms
+                if (blinks >= 10) {
                     clearInterval(blinkFive);
                     targetLetter.style.color = '#ffffff';
                     showModalTyped(index);
@@ -749,7 +747,7 @@
             const modalTitle = document.getElementById('modal-title');
             const modalBody = document.getElementById('modal-body');
 
-            // Limpieza de estados anteriores de animación CRT y visibilidad
+            // Limpieza del estado CRT anterior al abrir una nueva caja
             modalBox.classList.remove('crt-exit');
             modalBox.style.opacity = '1';
             modalBox.style.transform = 'scale(1,1)';
@@ -807,17 +805,18 @@
             closeContainer.appendChild(cursor);
             modalBody.appendChild(closeContainer);
 
-            // Modificación 2: Cierre directo con CRT shutdown effect sin solapamiento de desvanecimiento
+            // Secuencia de cierre limpia sin destellos
             const triggerClose = () => {
                 closeBtn.onclick = null;
                 backdrop.onclick = null;
 
-                // Ejecución directa de la animación CRT sin desvanecer previamente el texto
+                // Ejecutamos la animación CRT de contracción
                 modalBox.classList.add('crt-exit');
 
                 setTimeout(() => {
                     backdrop.classList.remove('active');
-                    modalBox.classList.remove('crt-exit');
+                    // NOTA: Mantenemos la clase 'crt-exit' para que el recuadro permanezca 
+                    // contraído e invisible hasta que se abra el próximo modal.
 
                     letters[index].style.color = '#dc2626';
                     currentLetterIndex++;
@@ -828,7 +827,7 @@
                     } else {
                         enableFinalHyperlink();
                     }
-                }, 400); // Duración de la animación CRT
+                }, 400); // Duración exacta de la animación CRT
             };
 
             closeBtn.onclick = triggerClose;
