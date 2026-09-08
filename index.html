@@ -21,20 +21,31 @@
             padding: 0;
         }
 
-        /* Body en negro para la transición inicial */
+        /* Body dinámico según el dispositivo */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #000000;
             color: var(--text-main);
+            width: 100vw;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow-x: hidden;
             position: relative;
         }
 
-        /* Imagen de fondo independiente para su desvanecimiento */
+        @media (min-width: 769px) {
+            body {
+                overflow: hidden;
+                height: 100vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+            }
+        }
+
+        /* Imagen de fondo independiente */
         .bg-image {
             position: fixed;
             top: 0;
@@ -44,7 +55,6 @@
             background: linear-gradient(rgba(11, 19, 41, 0.85), rgba(11, 19, 41, 0.10)), url('Quimera.png');
             background-size: cover;
             background-position: center center;
-            background-attachment: fixed;
             z-index: -1;
             opacity: 0;
             transition: opacity 1.5s ease;
@@ -54,19 +64,39 @@
             opacity: 1;
         }
 
+        /* LIENZO MAESTRO ESCALABLE (Escritorio y Modo Sitio Web en Móvil) */
+        .scaler-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1920px;
+            height: 1080px;
+            transform-origin: center center;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: none;
+        }
+
+        .interactive-zone {
+            pointer-events: auto;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
         /* Header Superior Izquierda */
         .top-header {
             position: absolute;
-            top: 0;
-            left: 0;
-            padding: 1.5rem 2rem;
+            top: 40px;
+            left: 60px;
             z-index: 10;
         }
 
         .top-header a {
             color: #ffffff;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 0.99rem;
+            font-size: 1.1rem;
             font-weight: 700;
             text-decoration: none;
             letter-spacing: -0.01em;
@@ -79,12 +109,11 @@
             text-decoration: underline;
         }
 
-        /* Header Superior Derecha (Música y Pantalla Completa) */
+        /* Header Superior Derecha */
         .top-header-right {
             position: absolute;
-            top: 0;
-            right: 0;
-            padding: 1.5rem 2rem;
+            top: 40px;
+            right: 60px;
             z-index: 10;
             display: flex;
             gap: 1.5rem;
@@ -93,14 +122,14 @@
         .top-header-right a {
             color: #ffffff;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 0.99rem;
+            font-size: 1.1rem;
             font-weight: 700;
             text-decoration: none;
             opacity: 0;
             transition: color 0.2s ease, opacity 0.8s ease, background-color 0.3s ease;
             background: rgba(15, 118, 110, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
         }
 
@@ -132,42 +161,37 @@
             opacity: 0;
         }
 
-        /* Contenedor Principal Centrado */
-        .main-wrapper {
-            max-width: 900px;
-            margin: auto;
-            padding: 2.5rem 1.5rem;
-            text-align: center;
-            width: 100%;
-        }
-
         /* Título Principal ECOSISTEMA */
         .page-title {
+            position: absolute;
+            top: 220px;
+            left: 50%;
+            transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 700;
             letter-spacing: 0.2em;
-            margin-top: -8rem;
-            margin-bottom: -1.5rem;
             text-transform: uppercase;
             color: #c88b32;
             text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-            min-height: 1.6em;
+            white-space: nowrap;
             opacity: 0;
         }
 
         /* Subtítulo QUIMERA */
         .quimera-word-container {
+            position: absolute;
+            top: 360px;
+            left: 50%;
+            transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 6rem;
+            font-size: 6.5rem;
             font-weight: 700;
             letter-spacing: 0.25em;
-            margin-top: 22rem;
-            margin-bottom: -1rem;
-            display: inline-block;
             cursor: default;
             opacity: 0;
             transition: opacity 0.8s ease;
+            white-space: nowrap;
         }
 
         .quimera-word-container.visible {
@@ -182,52 +206,162 @@
 
         /* Subtítulo de texto */
         .subtitle-text {
-            font-size: 1.5rem;
+            position: absolute;
+            top: 530px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.6rem;
             line-height: 1.6;
-            margin: -12rem auto -4rem auto;
-            max-width: 1000px;
+            max-width: 1100px;
+            width: 90%;
             color: #e2e8f0;
-            min-height: 1.6em;
-            opacity: 0;
-            width: calc(100% - 3rem);
             text-align: center;
+            opacity: 0;
         }
 
         /* Recuadro de instrucciones interactivo */
         .exploration-box {
+            position: absolute;
+            top: 670px;
+            left: 50%;
+            transform: translateX(-50%);
             max-width: 1200px;
-            margin: 16rem auto -10rem auto;
-            padding: 0.2rem 0rem;
-            background: rgba(15, 23, 42, 0.4);
+            width: 85%;
+            padding: 1.2rem 2rem;
+            background: rgba(15, 23, 42, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.7);
             border-radius: 8px;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: #cbd5e1;
             opacity: 0;
             transition: opacity 0.8s ease;
-            width: calc(100% - 3rem);
+            text-align: center;
         }
 
         .exploration-box.visible {
             opacity: 1;
         }
 
-        .exploration-box p {
-            text-align: center;
-            line-height: 1.6;
-        }
-
         #exp-title {
             font-weight: bold;
-            margin-bottom: 0rem;
             color: #ffffff;
-            min-height: 0.5em;
-            opacity: 0;
+            margin-bottom: 0.3rem;
         }
 
-        #exp-desc {
-            min-height: 0.2rem;
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.9rem;
             opacity: 0;
+            transition: opacity 500ms ease;
+        }
+
+        footer.visible {
+            opacity: 1;
+        }
+
+        footer p {
+            color: #ffffff;
+        }
+
+        /* ADAPTACIÓN MÓVIL (Modo Celular Normal: Pantallas <= 768px) */
+        @media (max-width: 768px) {
+            .scaler-container {
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                transform: none !important;
+                top: auto !important;
+                left: auto !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 5rem 1rem 3rem 1.5rem;
+            }
+
+            .interactive-zone {
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .top-header {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+            .top-header-right {
+                position: relative !important;
+                top: auto !important;
+                right: auto !important;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .page-title {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                font-size: 1.8rem !important;
+                text-align: center;
+                white-space: normal !important;
+                margin: 0.5rem 0 !important;
+            }
+
+            .quimera-word-container {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                font-size: 3rem !important;
+                text-align: center;
+                white-space: normal !important;
+                margin: 0.5rem 0 !important;
+            }
+
+            .subtitle-text {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                font-size: 1.1rem !important;
+                width: 100% !important;
+                margin: 0.5rem 0 !important;
+            }
+
+            .exploration-box {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 100% !important;
+                margin: 0.5rem 0 !important;
+                padding: 1rem !important;
+            }
+
+            footer {
+                position: relative !important;
+                bottom: auto !important;
+                left: auto !important;
+                transform: none !important;
+                margin-top: 2rem !important;
+            }
         }
 
         /* Recuadro Central Modal */
@@ -268,35 +402,17 @@
             transform-origin: center center;
         }
 
-        /* Animación CRT de apagado de televisión antigua (contracción en un punto) */
         @keyframes tvShutdown {
-            0% {
-                transform: scale(1, 1);
-                filter: brightness(1);
-                opacity: 1;
-            }
-            40% {
-                transform: scale(1, 0.005);
-                filter: brightness(3);
-                opacity: 1;
-            }
-            70% {
-                transform: scale(0.001, 0.005);
-                filter: brightness(5);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0, 0);
-                filter: brightness(0);
-                opacity: 0;
-            }
+            0% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
+            40% { transform: scale(1, 0.005); filter: brightness(3); opacity: 1; }
+            70% { transform: scale(0.001, 0.005); filter: brightness(5); opacity: 1; }
+            100% { transform: scale(0, 0); filter: brightness(0); opacity: 0; }
         }
 
         .modal-box.crt-exit {
             animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Animación de parpadeo para el cursor de la máquina de escribir */
         @keyframes blinkCursor {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -348,30 +464,6 @@
         .close-link:hover {
             color: #fb7185;
         }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 0.5rem 0.5rem;
-            background-color: rgba(11, 19, 41, 0.1);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: #ffffff;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: auto;
-            opacity: 0;
-            transition: opacity 500ms ease;
-        }
-
-        footer.visible {
-            opacity: 1;
-        }
-
-        footer p {
-            color: #ffffff;
-            opacity: 0;
-        }
     </style>
 </head>
 <body>
@@ -382,38 +474,41 @@
     <!-- Capa de fondo animada -->
     <div class="bg-image" id="bg-image"></div>
 
-    <!-- Header Izquierdo -->
-    <header class="top-header" id="top-header">
-        <a href="https://quimerac3.github.io/" id="header-link"></a>
-    </header>
-
-    <!-- Header Derecho -->
-    <div class="top-header-right">
-        <a href="#" id="music-link">🎵 Música: OFF</a>
-        <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
-    </div>
-
     <!-- Capa de desvanecimiento inicial en blanco -->
     <div id="intro-overlay"></div>
 
-    <main class="main-wrapper">
-        <h1 class="page-title" id="main-title"></h1>
+    <!-- Subprograma con control inteligente para Escritorio / Sitio Web en Celular vs Modo Celular -->
+    <div class="scaler-container" id="scalerContainer">
+        <div class="interactive-zone">
+            <!-- Header Izquierdo -->
+            <header class="top-header">
+                <a href="https://quimerac3.github.io/" id="header-link"></a>
+            </header>
 
-        <div class="quimera-word-container" id="quimera-word">
-            <span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span>
+            <!-- Header Derecho -->
+            <div class="top-header-right">
+                <a href="#" id="music-link">🎵 Música: OFF</a>
+                <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
+            </div>
+
+            <h1 class="page-title" id="main-title"></h1>
+
+            <div class="quimera-word-container" id="quimera-word">
+                <span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span>
+            </div>
+
+            <div class="subtitle-text" id="sub-text"></div>
+
+            <div class="exploration-box" id="exp-box">
+                <p id="exp-title"></p>
+                <p id="exp-desc"></p>
+            </div>
+
+            <footer>
+                <p id="footer-text"></p>
+            </footer>
         </div>
-    </main>
-
-    <div class="subtitle-text" id="sub-text"></div>
-
-    <div class="exploration-box" id="exp-box">
-        <p id="exp-title"></p>
-        <p id="exp-desc"></p>
     </div>
-
-    <footer>
-        <p id="footer-text"></p>
-    </footer>
 
     <!-- Modal -->
     <div id="modal-backdrop">
@@ -424,6 +519,32 @@
     </div>
 
     <script>
+        // Subprograma inteligente de escalado dinámico
+        function updateScreenScale() {
+            const scaler = document.getElementById('scalerContainer');
+            if (window.innerWidth <= 768) {
+                // Modo Celular Normal: Desactiva el escalado absoluto y usa flujo vertical responsivo
+                scaler.style.transform = 'none';
+                scaler.style.position = 'relative';
+                scaler.style.width = '100%';
+                scaler.style.height = 'auto';
+            } else {
+                // Modo Escritorio / Sitio Web de Escritorio en Celular: Activa el lienzo maestro de 1920x1080
+                scaler.style.position = 'absolute';
+                scaler.style.width = '1920px';
+                scaler.style.height = '1080px';
+                const baseW = 1920;
+                const baseH = 1080;
+                const scaleX = window.innerWidth / baseW;
+                const scaleY = window.innerHeight / baseH;
+                const scale = Math.min(scaleX, scaleY);
+                scaler.style.transform = `translate(-50%, -50%) scale(${scale})`;
+            }
+        }
+
+        window.addEventListener('resize', updateScreenScale);
+        window.addEventListener('DOMContentLoaded', updateScreenScale);
+
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
                 window.location.reload();
@@ -558,7 +679,6 @@
             }
         ];
 
-        // Función reutilizable para texto estándar (máquina de escribir)
         function typeWriter(elementId, text, speed = 35) {
             return new Promise(resolve => {
                 const el = document.getElementById(elementId);
@@ -578,7 +698,6 @@
             });
         }
 
-        // Función inteligente de máquina de escribir con soporte para etiquetas HTML (ej. <sup>)
         function typeWriterHTML(element, htmlString, speed = 20) {
             return new Promise(resolve => {
                 element.innerHTML = '';
@@ -612,7 +731,6 @@
             });
         }
 
-        // Secuencia principal cronológica
         async function runIntroSequence() {
             const whiteOverlay = document.getElementById('intro-overlay');
             whiteOverlay.classList.add('fade-out');
@@ -644,7 +762,7 @@
             document.getElementById('exp-box').classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
-            await typeWriter('exp-title', 'EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA: Una vez que la palabra QUIMERA cambie de color a blanco, selecccione la letra parpadeante para descubrir: ¿Qué es QUIMERA?', 25);
+            await typeWriter('exp-title', 'EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA: Una vez que la palabra QUIMERA cambie de color a blanco, seleccione la letra parpadeante para descubrir: ¿Qué es QUIMERA?', 25);
             await new Promise(r => setTimeout(r, 400));
 
             document.querySelector('footer').classList.add('visible');
@@ -720,7 +838,6 @@
             targetLetter.onclick = () => handleLetterClick(currentLetterIndex);
         }
 
-        // Manejo del parpadeo exacto de 5 veces en 1000ms al seleccionar la letra
         function handleLetterClick(index) {
             const targetLetter = letters[index];
             targetLetter.onclick = null;
@@ -740,14 +857,12 @@
             }, 100);
         }
 
-        // Apertura del modal con escritura secuencial de contenido
         async function showModalTyped(index) {
             const backdrop = document.getElementById('modal-backdrop');
             const modalBox = document.getElementById('modal-content-box');
             const modalTitle = document.getElementById('modal-title');
             const modalBody = document.getElementById('modal-body');
 
-            // Limpieza del estado CRT anterior al abrir una nueva caja
             modalBox.classList.remove('crt-exit');
             modalBox.style.opacity = '1';
             modalBox.style.transform = 'scale(1,1)';
@@ -782,7 +897,6 @@
                 }
             }
 
-            // Contenedor para el botón de cierre alineado a la derecha con cursor parpadeante
             let closeContainer = document.createElement('div');
             closeContainer.style.textAlign = 'right';
             closeContainer.style.marginTop = '1.5rem';
@@ -805,18 +919,14 @@
             closeContainer.appendChild(cursor);
             modalBody.appendChild(closeContainer);
 
-            // Secuencia de cierre limpia sin destellos
             const triggerClose = () => {
                 closeBtn.onclick = null;
                 backdrop.onclick = null;
 
-                // Ejecutamos la animación CRT de contracción
                 modalBox.classList.add('crt-exit');
 
                 setTimeout(() => {
                     backdrop.classList.remove('active');
-                    // NOTA: Mantenemos la clase 'crt-exit' para que el recuadro permanezca 
-                    // contraído e invisible hasta que se abra el próximo modal.
 
                     letters[index].style.color = '#dc2626';
                     currentLetterIndex++;
@@ -827,7 +937,7 @@
                     } else {
                         enableFinalHyperlink();
                     }
-                }, 400); // Duración exacta de la animación CRT
+                }, 400);
             };
 
             closeBtn.onclick = triggerClose;
