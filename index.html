@@ -218,7 +218,6 @@
         }
 
         #exp-title {
-            text-transform: uppercase;
             font-weight: bold;
             margin-bottom: 0rem;
             color: #ffffff;
@@ -310,7 +309,7 @@
             margin-bottom: 1rem;
             padding-bottom: 0.4rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: center; /* Ajuste: Encabezados centrados */
+            text-align: center;
         }
 
         .modal-box p, .modal-box li {
@@ -634,7 +633,9 @@
             await typeWriter('main-title', 'ECOSISTEMA', 80);
             await new Promise(r => setTimeout(r, 400));
 
+            // Modificación 1: Desvanecimiento de entrada de QUIMERA y posterior animación preestablecida
             document.getElementById('quimera-word').classList.add('visible');
+            await new Promise(r => setTimeout(r, 800)); // Espera a que concluya el desvanecimiento (0.8s)
             await playQuimeraAppearanceAsync();
             await new Promise(r => setTimeout(r, 400));
 
@@ -644,6 +645,7 @@
             document.getElementById('exp-box').classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
+            // Modificación 3: Texto con mayúsculas y minúsculas exactas
             await typeWriter('exp-title', 'EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA: Una vez que la palabra QUIMERA cambie de color a blanco, selecccione la letra parpadeante para descubrir: ¿Qué es QUIMERA?', 25);
             await new Promise(r => setTimeout(r, 400));
 
@@ -740,7 +742,7 @@
             }, 100);
         }
 
-        // Apertura del modal con desvanecimiento inicial de caja y escritura secuencial de contenido
+        // Apertura del modal con escritura secuencial de contenido
         async function showModalTyped(index) {
             const backdrop = document.getElementById('modal-backdrop');
             const modalBox = document.getElementById('modal-content-box');
@@ -755,15 +757,12 @@
             modalTitle.innerHTML = "";
             modalBody.innerHTML = "";
             
-            // Paso 02/06/10/14/18/22/26: Aparición del recuadro con transición de desvanecimiento
             backdrop.classList.add('active');
 
             const data = modalData[index];
             
-            // Transición de máquina de escribir para el título
             await typeWriterHTML(modalTitle, data.title, 25);
 
-            // Transición de máquina de escribir para el contenido de los párrafos y listas
             for (let item of data.content) {
                 if (item.type === 'p') {
                     let pElem = document.createElement('p');
@@ -808,42 +807,28 @@
             closeContainer.appendChild(cursor);
             modalBody.appendChild(closeContainer);
 
-            // Secuencia de cierre del recuadro
+            // Modificación 2: Cierre directo con CRT shutdown effect sin solapamiento de desvanecimiento
             const triggerClose = () => {
-                // Evitar múltiples disparos de cierre
                 closeBtn.onclick = null;
                 backdrop.onclick = null;
 
-                // Paso 1: Transición de desvanecimiento de salida del texto en 100 ms
-                modalBody.style.transition = 'opacity 0.1s ease';
-                modalBody.style.opacity = '0';
-                modalTitle.style.transition = 'opacity 0.1s ease';
-                modalTitle.style.opacity = '0';
+                // Ejecución directa de la animación CRT sin desvanecer previamente el texto
+                modalBox.classList.add('crt-exit');
 
                 setTimeout(() => {
-                    // Paso 2: Transición de efecto de apagado de televisión antigua (contracción en un punto)
-                    modalBox.classList.add('crt-exit');
+                    backdrop.classList.remove('active');
+                    modalBox.classList.remove('crt-exit');
 
-                    setTimeout(() => {
-                        backdrop.classList.remove('active');
-                        
-                        // Restablecer estilos internos del modal para futuras aperturas
-                        modalBody.style.opacity = '1';
-                        modalTitle.style.opacity = '1';
-                        modalBox.classList.remove('crt-exit');
+                    letters[index].style.color = '#dc2626';
+                    currentLetterIndex++;
+                    selectedCount++;
 
-                        // Paso 3: Dar paso a la animación de la siguiente letra (o animación final si concluye)
-                        letters[index].style.color = '#dc2626';
-                        currentLetterIndex++;
-                        selectedCount++;
-
-                        if (selectedCount < 7) {
-                            activateCurrentLetter();
-                        } else {
-                            enableFinalHyperlink();
-                        }
-                    }, 400); // Duración de la animación CRT
-                }, 100); // 100 ms de desvanecimiento de texto
+                    if (selectedCount < 7) {
+                        activateCurrentLetter();
+                    } else {
+                        enableFinalHyperlink();
+                    }
+                }, 400); // Duración de la animación CRT
             };
 
             closeBtn.onclick = triggerClose;
