@@ -21,7 +21,7 @@
             padding: 0;
         }
 
-        /* Body dinámico según el dispositivo */
+        /* Body dinámico según el dispositivo con soporte para transición de visión borrosa */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #000000;
@@ -29,6 +29,11 @@
             width: 100vw;
             min-height: 100vh;
             position: relative;
+            transition: filter 1s ease;
+        }
+
+        body.blurring {
+            filter: blur(12px);
         }
 
         @media (min-width: 769px) {
@@ -988,16 +993,25 @@
 
             runSequence();
 
+            // Secuencia de salida requerida: Clic -> Visión borrosa (1000ms) -> Desvanecimiento en blanco -> Redirección
             wordContainer.onclick = () => {
                 clearTimeout(globalColorInterval);
-                const overlay = document.getElementById('intro-overlay');
-                overlay.style.background = '#ffffff';
-                overlay.style.opacity = '1';
-                overlay.classList.remove('fade-out');
 
+                // 02: Inicia la transición con efecto de visión borrosa en un tiempo de 1000ms
+                document.body.classList.add('blurring');
+
+                // Tras cumplirse los 1000ms del blur, inicia la transición de desvanecimiento de salida en blanco (03)
                 setTimeout(() => {
-                    window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
-                }, 500);
+                    const overlay = document.getElementById('intro-overlay');
+                    overlay.style.background = '#ffffff';
+                    overlay.style.opacity = '1';
+                    overlay.classList.remove('fade-out');
+
+                    // Tiempo de espera para completar el desvanecimiento antes de cambiar de página
+                    setTimeout(() => {
+                        window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
+                    }, 1000);
+                }, 1000);
             };
         }
     </script>
