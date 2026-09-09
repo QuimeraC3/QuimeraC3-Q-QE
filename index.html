@@ -253,12 +253,12 @@
             margin-bottom: 0.2rem;
         }
 
-        /* Recuadro del Footer */
+        /* Recuadro del Footer (Más abajo y más ancho) */
         footer {
             position: absolute;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
+            bottom: 12px;
+            left: 40px;
+            right: 40px;
             width: auto;
             padding: 0.6rem 1rem;
             background: rgba(15, 23, 42, 0.6);
@@ -270,6 +270,7 @@
             opacity: 0;
             transition: opacity 500ms ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            z-index: 100;
         }
 
         footer.visible {
@@ -518,7 +519,7 @@
             </div>
 
             <footer>
-                <p id="footer-text"></p>
+                <p data-text="&bull; &copy; 2026 Instituto Quimera. &bull; Centro de Investigación, Docencia, Servicio y Difusión. &bull; Dr.C. Cesar Cerezo Camacho. &bull; Todos los derechos reservados. &bull;"></p>
             </footer>
         </div>
     </div>
@@ -536,13 +537,11 @@
         function updateScreenScale() {
             const scaler = document.getElementById('scalerContainer');
             if (window.innerWidth <= 768) {
-                // Modo Celular Normal: Desactiva el escalado absoluto y usa flujo vertical responsivo
                 scaler.style.transform = 'none';
                 scaler.style.position = 'relative';
                 scaler.style.width = '100%';
                 scaler.style.height = 'auto';
             } else {
-                // Modo Escritorio / Sitio Web de Escritorio en Celular: Activa el lienzo maestro de 1920x1080
                 scaler.style.position = 'absolute';
                 scaler.style.width = '1920px';
                 scaler.style.height = '1080px';
@@ -685,7 +684,7 @@
             {
                 title: "UNA ESTRUCTURA EN EVOLUCIÓN.",
                 content: [
-                    { type: 'p', text: "Quimera não pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve." },
+                    { type: 'p', text: "Quimera no pretende ser una estructura estática. Sus áreas, proyectos, metodologías y recursos podrán evolucionar conforme evolucionen la ciencia, la tecnología y las necesidades de los profesionales y las comunidades a las que sirve." },
                     { type: 'p', text: "Lo que permanece es su orientación: comprender antes de intervenir; fundamentar antes de afirmar; integrar antes de fragmentar; y evaluar para poder mejorar." },
                     { type: 'p', text: "Quimera existe para convertir preguntas en conocimiento, conocimiento en capacidad y capacidad en práctica responsable." }
                 ]
@@ -778,12 +777,35 @@
             await typeWriter('exp-title', 'EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA: Una vez que la palabra QUIMERA cambie de color a blanco, seleccione la letra parpadeante para descubrir: ¿Qué es QUIMERA?', 25);
             await new Promise(r => setTimeout(r, 400));
 
+            // Footer con lógica de tipado del index anterior
             document.querySelector('footer').classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
-            const currentYear = new Date().getFullYear();
-            const footerString = `• © ${currentYear} Instituto Quimera. • Centro de Investigación, Docencia, Servicio y Difusión. • Dr.C. Cesar Cerezo Camacho. • Todos los derechos reservados. •`;
-            await typeWriter('footer-text', footerString, 20);
+            await new Promise(resolveFooter => {
+                const footerPs = document.querySelectorAll('footer p');
+                let pIndex = 0;
+                function typeFooterP() {
+                    if (pIndex >= footerPs.length) {
+                        resolveFooter();
+                        return;
+                    }
+                    let p = footerPs[pIndex];
+                    let text = p.dataset.text.replace('2026', new Date().getFullYear());
+                    let i = 0;
+                    function typeChar() {
+                        if (i <= text.length) {
+                            p.innerHTML = text.substring(0, i);
+                            i++;
+                            setTimeout(typeChar, 18);
+                        } else {
+                            pIndex++;
+                            setTimeout(typeFooterP, 100);
+                        }
+                    }
+                    typeChar();
+                }
+                typeFooterP();
+            });
         }
 
         window.addEventListener('DOMContentLoaded', () => {
