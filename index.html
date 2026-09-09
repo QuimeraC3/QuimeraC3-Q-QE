@@ -253,18 +253,24 @@
             margin-bottom: 0.2rem;
         }
 
-        /* Footer */
+        /* Recuadro del Footer */
         footer {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
+            max-width: 1300px;
+            width: 85%;
+            padding: 0.6rem 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
             text-align: center;
             color: #ffffff;
             font-size: 0.9rem;
             opacity: 0;
             transition: opacity 500ms ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
 
         footer.visible {
@@ -272,7 +278,7 @@
         }
 
         footer p {
-            color: #ffffff;
+            color: #e2e8f0;
         }
 
         /* ADAPTACIÓN MÓVIL (Modo Celular Normal: Pantallas <= 768px) */
@@ -365,7 +371,9 @@
                 bottom: auto !important;
                 left: auto !important;
                 transform: none !important;
-                margin-top: 2rem !important;
+                width: 100% !important;
+                margin: 0.5rem 0 2rem 0 !important;
+                padding: 1rem !important;
             }
         }
 
@@ -993,21 +1001,17 @@
 
             runSequence();
 
-            // Secuencia de salida requerida: Clic -> Visión borrosa (1000ms) -> Desvanecimiento en blanco -> Redirección
             wordContainer.onclick = () => {
                 clearTimeout(globalColorInterval);
 
-                // 02: Inicia la transición con efecto de visión borrosa en un tiempo de 1000ms
                 document.body.classList.add('blurring');
 
-                // Tras cumplirse los 1000ms del blur, inicia la transición de desvanecimiento de salida en blanco (03)
                 setTimeout(() => {
                     const overlay = document.getElementById('intro-overlay');
                     overlay.style.background = '#ffffff';
                     overlay.style.opacity = '1';
                     overlay.classList.remove('fade-out');
 
-                    // Tiempo de espera para completar el desvanecimiento antes de cambiar de página
                     setTimeout(() => {
                         window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
                     }, 1000);
