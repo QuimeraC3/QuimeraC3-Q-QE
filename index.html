@@ -21,33 +21,20 @@
             padding: 0;
         }
 
-        /* Body dinámico según el dispositivo con soporte para transición de visión borrosa */
+        /* Arquitectura de diseño directo al viewport (Igual a index01) */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #000000;
             color: var(--text-main);
             width: 100vw;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
             position: relative;
             transition: filter 1s ease;
         }
 
         body.blurring {
             filter: blur(12px);
-        }
-
-        @media (min-width: 769px) {
-            body {
-                overflow: hidden;
-                height: 100vh;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                overflow-y: auto;
-                height: auto;
-            }
         }
 
         /* Imagen de fondo independiente */
@@ -69,85 +56,6 @@
             opacity: 1;
         }
 
-        /* LIENZO MAESTRO ESCALABLE (Escritorio y Modo Sitio Web en Móvil) */
-        .scaler-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 1920px;
-            height: 1080px;
-            transform-origin: center center;
-            transform: translate(-50%, -50%) scale(1);
-            pointer-events: none;
-        }
-
-        .interactive-zone {
-            pointer-events: auto;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-
-        /* Header Superior Izquierda */
-        .top-header {
-            position: absolute;
-            top: 40px;
-            left: 60px;
-            z-index: 10;
-        }
-
-        .top-header a {
-            color: #ffffff;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: -0.01em;
-            transition: color 0.2s ease;
-            opacity: 0;
-        }
-
-        .top-header a:hover {
-            color: #38bdf8;
-            text-decoration: underline;
-        }
-
-        /* Header Superior Derecha */
-        .top-header-right {
-            position: absolute;
-            top: 40px;
-            right: 60px;
-            z-index: 10;
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .top-header-right a {
-            color: #ffffff;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            opacity: 0;
-            transition: color 0.2s ease, opacity 0.8s ease, background-color 0.3s ease;
-            background: rgba(15, 118, 110, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-        }
-
-        .top-header-right a.visible {
-            opacity: 1;
-        }
-
-        .top-header-right a:hover {
-            background: var(--primary);
-            color: #ffffff;
-            text-decoration: none;
-        }
-
         /* Capa de desvanecimiento inicial en blanco */
         #intro-overlay {
             position: fixed;
@@ -166,14 +74,71 @@
             opacity: 0;
         }
 
+        /* Header Superior Izquierda */
+        .top-header {
+            position: absolute;
+            top: 2.5rem;
+            left: 3rem;
+            z-index: 100;
+        }
+
+        .top-header a {
+            color: #ffffff;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            transition: color 0.2s ease;
+            opacity: 0;
+        }
+
+        .top-header a:hover {
+            color: #38bdf8;
+            text-decoration: underline;
+        }
+
+        /* Header Superior Derecha */
+        .top-header-right {
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .top-header-right a {
+            color: #ffffff;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.8s ease, background-color 0.3s ease;
+            background: rgba(15, 118, 110, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+        }
+
+        .top-header-right a.visible {
+            opacity: 1;
+        }
+
+        .top-header-right a:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
         /* Título Principal ECOSISTEMA */
         .page-title {
             position: absolute;
-            top: 110px;
+            top: 15vh;
             left: 50%;
             transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 3.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -181,22 +146,24 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.6);
             white-space: nowrap;
             opacity: 0;
+            z-index: 10;
         }
 
         /* Subtítulo QUIMERA */
         .quimera-word-container {
             position: absolute;
-            top: 580px;
+            top: 38vh;
             left: 50%;
             transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 6.5rem;
+            font-size: 5rem;
             font-weight: 700;
             letter-spacing: 0.25em;
             cursor: default;
             opacity: 0;
             transition: opacity 0.8s ease;
             white-space: nowrap;
+            z-index: 10;
         }
 
         .quimera-word-container.visible {
@@ -212,35 +179,37 @@
         /* Subtítulo de texto */
         .subtitle-text {
             position: absolute;
-            top: 700px;
+            top: calc(38vh + 5.5rem + 0.5rem);
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.6rem;
-            line-height: 1.6;
-            max-width: 1100px;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            max-width: 900px;
             width: 90%;
             color: #e2e8f0;
             text-align: center;
             opacity: 0;
+            z-index: 10;
         }
 
         /* Recuadro de instrucciones interactivo */
         .exploration-box {
             position: absolute;
-            top: 1000px;
+            top: 68vh;
             left: 50%;
             transform: translateX(-50%);
-            max-width: 1300px;
+            max-width: 1000px;
             width: 85%;
-            padding: 0.2rem 0.2rem;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            padding: 0.8rem 1.2rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #cbd5e1;
             opacity: 0;
             transition: opacity 0.8s ease;
             text-align: center;
+            z-index: 10;
         }
 
         .exploration-box.visible {
@@ -253,23 +222,21 @@
             margin-bottom: 0.2rem;
         }
 
-        /* Recuadro del Footer (Más abajo y más ancho) */
+        /* Footer integrado de forma absoluta al fondo del viewport */
         footer {
             position: absolute;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
-            width: auto;
-            padding: 0.6rem 1rem;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.5rem 1rem;
             background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
             color: #ffffff;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0;
             transition: opacity 500ms ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
             z-index: 100;
         }
 
@@ -281,100 +248,69 @@
             color: #e2e8f0;
         }
 
-        /* ADAPTACIÓN MÓVIL (Modo Celular Normal: Pantallas <= 768px) */
-        @media (max-width: 768px) {
-            .scaler-container {
-                position: relative !important;
-                width: 100% !important;
-                height: auto !important;
-                transform: none !important;
-                top: auto !important;
-                left: auto !important;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 5rem 1rem 3rem 1.5rem;
+        /* ========================================================== */
+        /* OPTIMIZACIÓN RESPONSIVO PARA MÓVILES (Estilo index01)       */
+        /* ========================================================== */
+        @media (max-width: 900px) {
+            body {
+                height: auto;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
 
-            .interactive-zone {
-                position: relative !important;
-                width: 100% !important;
-                height: auto !important;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 1.5rem;
+            .bg-image {
+                height: 100%;
+                background-attachment: scroll;
             }
 
-            .top-header {
+            .top-header, .top-header-right {
                 position: relative !important;
                 top: auto !important;
                 left: auto !important;
+                right: auto !important;
                 text-align: center;
-                margin-bottom: 0.5rem;
+                justify-content: center;
+                margin: 1rem 0;
             }
 
             .top-header-right {
-                position: relative !important;
-                top: auto !important;
-                right: auto !important;
-                justify-content: center;
                 flex-wrap: wrap;
                 gap: 0.8rem;
-                margin-bottom: 1rem;
+            }
+
+            .page-title, .quimera-word-container, .subtitle-text, .exploration-box {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 1rem auto !important;
+                text-align: center;
+                white-space: normal !important;
             }
 
             .page-title {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
                 font-size: 1.8rem !important;
-                text-align: center;
-                white-space: normal !important;
-                margin: 0.5rem 0 !important;
             }
 
             .quimera-word-container {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                font-size: 3rem !important;
-                text-align: center;
-                white-space: normal !important;
-                margin: 0.5rem 0 !important;
+                font-size: 2.5rem !important;
             }
 
             .subtitle-text {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                font-size: 1.1rem !important;
-                width: 100% !important;
-                margin: 0.5rem 0 !important;
+                font-size: 1rem !important;
+                padding: 0 1rem;
             }
 
             .exploration-box {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 100% !important;
-                margin: 0.5rem 0 !important;
                 padding: 1rem !important;
             }
 
             footer {
                 position: relative !important;
-                bottom: auto !important;
-                left: auto !important;
-                right: auto !important;
-                transform: none !important;
-                width: 100% !important;
-                margin: 0.5rem 0 2rem 0 !important;
-                padding: 1rem !important;
+                margin-top: 1.5rem;
+                padding: 1rem;
             }
         }
 
@@ -385,7 +321,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(5px);
             z-index: 1000;
             display: flex;
@@ -491,38 +427,33 @@
     <!-- Capa de desvanecimiento inicial en blanco -->
     <div id="intro-overlay"></div>
 
-    <!-- Subprograma con control inteligente para Escritorio / Sitio Web en Celular vs Modo Celular -->
-    <div class="scaler-container" id="scalerContainer">
-        <div class="interactive-zone">
-            <!-- Header Izquierdo -->
-            <header class="top-header">
-                <a href="https://quimerac3.github.io/" id="header-link"></a>
-            </header>
+    <!-- Header Izquierdo -->
+    <header class="top-header">
+        <a href="https://quimerac3.github.io/" id="header-link"></a>
+    </header>
 
-            <!-- Header Derecho -->
-            <div class="top-header-right">
-                <a href="#" id="music-link">🎵 Música: OFF</a>
-                <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
-            </div>
-
-            <h1 class="page-title" id="main-title"></h1>
-
-            <div class="quimera-word-container" id="quimera-word">
-                <span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span>
-            </div>
-
-            <div class="subtitle-text" id="sub-text"></div>
-
-            <div class="exploration-box" id="exp-box">
-                <p id="exp-title"></p>
-                <p id="exp-desc"></p>
-            </div>
-
-            <footer>
-                <p data-text="&bull; &copy; 2026 Instituto Quimera. &bull; Centro de Investigación, Docencia, Servicio y Difusión. &bull; Dr.C. Cesar Cerezo Camacho. &bull; Todos los derechos reservados. &bull;"></p>
-            </footer>
-        </div>
+    <!-- Header Derecho -->
+    <div class="top-header-right">
+        <a href="#" id="music-link">🎵 Música: OFF</a>
+        <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
     </div>
+
+    <h1 class="page-title" id="main-title"></h1>
+
+    <div class="quimera-word-container" id="quimera-word">
+        <span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span>
+    </div>
+
+    <div class="subtitle-text" id="sub-text"></div>
+
+    <div class="exploration-box" id="exp-box">
+        <p id="exp-title"></p>
+        <p id="exp-desc"></p>
+    </div>
+
+    <footer>
+        <p data-text="&bull; &copy; 2026 Instituto Quimera. &bull; Centro de Investigación, Docencia, Servicio y Difusión. &bull; Dr.C. Cesar Cerezo Camacho. &bull; Todos los derechos reservados. &bull;"></p>
+    </footer>
 
     <!-- Modal -->
     <div id="modal-backdrop">
@@ -533,30 +464,6 @@
     </div>
 
     <script>
-        // Subprograma inteligente de escalado dinámico
-        function updateScreenScale() {
-            const scaler = document.getElementById('scalerContainer');
-            if (window.innerWidth <= 768) {
-                scaler.style.transform = 'none';
-                scaler.style.position = 'relative';
-                scaler.style.width = '100%';
-                scaler.style.height = 'auto';
-            } else {
-                scaler.style.position = 'absolute';
-                scaler.style.width = '1920px';
-                scaler.style.height = '1080px';
-                const baseW = 1920;
-                const baseH = 1080;
-                const scaleX = window.innerWidth / baseW;
-                const scaleY = window.innerHeight / baseH;
-                const scale = Math.min(scaleX, scaleY);
-                scaler.style.transform = `translate(-50%, -50%) scale(${scale})`;
-            }
-        }
-
-        window.addEventListener('resize', updateScreenScale);
-        window.addEventListener('DOMContentLoaded', updateScreenScale);
-
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
                 window.location.reload();
@@ -777,7 +684,6 @@
             await typeWriter('exp-title', 'EXPLORACIÓN INTERACTIVA DEL ECOSISTEMA: Una vez que la palabra QUIMERA cambie de color a blanco, seleccione la letra parpadeante para descubrir: ¿Qué es QUIMERA?', 25);
             await new Promise(r => setTimeout(r, 400));
 
-            // Footer con lógica de tipado del index anterior
             document.querySelector('footer').classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
