@@ -371,7 +371,7 @@
         .modal-box h2 {
             font-family: Georgia, "Times New Roman", serif;
             font-size: 1.5rem;
-            color: #38bdf8;
+            color: #c88b32; /* Modificado de azul a cobre dorado */
             margin-bottom: 1rem;
             padding-bottom: 0.4rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -404,7 +404,7 @@
 
         .close-link {
             display: inline-block;
-            color: #f43f5e;
+            color: #c88b32; /* Modificado de rojo a cobre dorado */
             font-weight: bold;
             cursor: pointer;
             text-decoration: underline;
@@ -412,7 +412,7 @@
         }
 
         .close-link:hover {
-            color: #fb7185;
+            color: #e0a96d; /* Tono complementario cálido para el hover */
         }
     </style>
 </head>
@@ -899,7 +899,7 @@
                 let i = 0;
                 function turnCopperGold(callback) {
                     if (i < letters.length) {
-                        letters[i].style.color = '#c88b32'; // Color cobre dorado unificado con la paleta
+                        letters[i].style.color = '#c88b32';
                         i++;
                         globalColorInterval = setTimeout(() => turnCopperGold(callback), stepTime);
                     } else if (callback) {
