@@ -897,11 +897,11 @@
 
             function runSequence() {
                 let i = 0;
-                function turnRed(callback) {
+                function turnCopperGold(callback) {
                     if (i < letters.length) {
-                        letters[i].style.color = '#dc2626';
+                        letters[i].style.color = '#c88b32'; // Color cobre dorado unificado con la paleta
                         i++;
-                        globalColorInterval = setTimeout(() => turnRed(callback), stepTime);
+                        globalColorInterval = setTimeout(() => turnCopperGold(callback), stepTime);
                     } else if (callback) {
                         callback();
                     }
@@ -918,7 +918,7 @@
                     }
                 }
 
-                turnRed(() => {
+                turnCopperGold(() => {
                     i = 0;
                     turnWhite(() => {
                         j = 0;
