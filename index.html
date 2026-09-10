@@ -249,6 +249,21 @@
         }
 
         /* ========================================================== */
+        /* AJUSTE ESPECÍFICO PARA RESOLUCIÓN 1920x1080px (PROYECTOR)    */
+        /* ========================================================== */
+        @media (min-width: 1400px) and (max-width: 1920px) and (max-height: 1080px) {
+            .quimera-word-container {
+                top: 52vh;
+            }
+            .subtitle-text {
+                top: calc(52vh + 5.0rem + 0.5rem);
+            }
+            .exploration-box {
+                top: 85vh;
+            }
+        }
+
+        /* ========================================================== */
         /* OPTIMIZACIÓN RESPONSIVO PARA MÓVILES (Estilo index01)       */
         /* ========================================================== */
         @media (max-width: 900px) {
@@ -929,20 +944,16 @@
 
             runSequence();
 
-            // Corrección: Sincronización simultánea de la visión borrosa y el fundido blanco (paralelo)
             wordContainer.onclick = () => {
                 clearTimeout(globalColorInterval);
 
-                // 1. Activar el desenfoque de inmediato
                 document.body.classList.add('blurring');
 
-                // 2. Activar la transición blanca de salida al mismo tiempo
                 const overlay = document.getElementById('intro-overlay');
                 overlay.style.background = '#ffffff';
                 overlay.style.opacity = '1';
                 overlay.classList.remove('fade-out');
 
-                // 3. Reducir la espera a 1 segundo para unificar el tiempo de transición
                 setTimeout(() => {
                     window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
                 }, 1000);
