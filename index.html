@@ -152,7 +152,7 @@
         /* Subtítulo QUIMERA */
         .quimera-word-container {
             position: absolute;
-            top: 57vh;
+            top: 55vh;
             left: 50%;
             transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
@@ -179,7 +179,7 @@
         /* Subtítulo de texto */
         .subtitle-text {
             position: absolute;
-            top: calc(57vh + 5.0rem + 0.5rem);
+            top: calc(55vh + 5.0rem + 0.5rem);
             left: 50%;
             transform: translateX(-50%);
             font-size: 1.3rem;
@@ -252,14 +252,17 @@
         /* AJUSTE ESPECÍFICO PARA RESOLUCIÓN 1920x1080px (PROYECTOR)    */
         /* ========================================================== */
         @media (min-width: 1400px) and (max-width: 1920px) and (max-height: 1080px) {
+            .page-title {
+                top: 09vh;
+            }
             .quimera-word-container {
-                top: 52vh;
+                top: 55vh;
             }
             .subtitle-text {
-                top: calc(52vh + 5.0rem + 0.5rem);
+                top: calc(55vh + 5.0rem + 0.5rem);
             }
             .exploration-box {
-                top: 85vh;
+                top: 94vh;
             }
         }
 
