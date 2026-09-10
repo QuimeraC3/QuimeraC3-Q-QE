@@ -11,7 +11,7 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --primary: #0f766e;
-            --accent: #dc2626;
+            --accent: #c88b32;
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
         }
 
@@ -740,7 +740,7 @@
                 let idx = 0;
                 function showNextRed() {
                     if (idx < letters.length) {
-                        letters[idx].style.color = '#dc2626';
+                        letters[idx].style.color = '#c88b32';
                         idx++;
                         setTimeout(showNextRed, 200);
                     } else {
@@ -771,7 +771,7 @@
             let isWhite = true;
 
             activeBlinkInterval = setInterval(() => {
-                targetLetter.style.color = isWhite ? '#dc2626' : '#ffffff';
+                targetLetter.style.color = isWhite ? '#c88b32' : '#ffffff';
                 isWhite = !isWhite;
             }, 300);
 
@@ -787,7 +787,7 @@
             let blinks = 0;
             let isWhite = false;
             const blinkFive = setInterval(() => {
-                targetLetter.style.color = isWhite ? '#ffffff' : '#dc2626';
+                targetLetter.style.color = isWhite ? '#ffffff' : '#c88b32';
                 isWhite = !isWhite;
                 blinks++;
                 if (blinks >= 10) {
@@ -851,7 +851,7 @@
             cursor.style.display = 'inline-block';
             cursor.style.width = '8px';
             cursor.style.height = '1.1em';
-            cursor.style.background = '#f43f5e';
+            cursor.style.background = '#c88b32';
             cursor.style.marginLeft = '4px';
             cursor.style.verticalAlign = 'middle';
             cursor.style.animation = 'blinkCursor 0.8s infinite';
@@ -869,7 +869,7 @@
                 setTimeout(() => {
                     backdrop.classList.remove('active');
 
-                    letters[index].style.color = '#dc2626';
+                    letters[index].style.color = '#c88b32';
                     currentLetterIndex++;
                     selectedCount++;
 
