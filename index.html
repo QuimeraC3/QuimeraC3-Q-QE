@@ -371,7 +371,7 @@
         .modal-box h2 {
             font-family: Georgia, "Times New Roman", serif;
             font-size: 1.5rem;
-            color: #c88b32; /* Modificado de azul a cobre dorado */
+            color: #c88b32;
             margin-bottom: 1rem;
             padding-bottom: 0.4rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -404,7 +404,7 @@
 
         .close-link {
             display: inline-block;
-            color: #c88b32; /* Modificado de rojo a cobre dorado */
+            color: #c88b32;
             font-weight: bold;
             cursor: pointer;
             text-decoration: underline;
@@ -412,7 +412,7 @@
         }
 
         .close-link:hover {
-            color: #e0a96d; /* Tono complementario cálido para el hover */
+            color: #e0a96d;
         }
     </style>
 </head>
@@ -929,20 +929,22 @@
 
             runSequence();
 
+            // Corrección: Sincronización simultánea de la visión borrosa y el fundido blanco (paralelo)
             wordContainer.onclick = () => {
                 clearTimeout(globalColorInterval);
 
+                // 1. Activar el desenfoque de inmediato
                 document.body.classList.add('blurring');
 
-                setTimeout(() => {
-                    const overlay = document.getElementById('intro-overlay');
-                    overlay.style.background = '#ffffff';
-                    overlay.style.opacity = '1';
-                    overlay.classList.remove('fade-out');
+                // 2. Activar la transición blanca de salida al mismo tiempo
+                const overlay = document.getElementById('intro-overlay');
+                overlay.style.background = '#ffffff';
+                overlay.style.opacity = '1';
+                overlay.classList.remove('fade-out');
 
-                    setTimeout(() => {
-                        window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
-                    }, 1000);
+                // 3. Reducir la espera a 1 segundo para unificar el tiempo de transición
+                setTimeout(() => {
+                    window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
                 }, 1000);
             };
         }
