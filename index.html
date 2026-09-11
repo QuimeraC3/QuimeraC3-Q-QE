@@ -791,7 +791,7 @@
             activeBlinkInterval = setInterval(() => {
                 targetLetter.style.color = isWhite ? '#c88b32' : '#ffffff';
                 isWhite = !isWhite;
-            }, 500);
+            }, 250);
 
             targetLetter.style.cursor = 'pointer';
             targetLetter.onclick = () => handleLetterClick(currentLetterIndex);
